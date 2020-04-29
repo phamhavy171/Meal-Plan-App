@@ -10,6 +10,7 @@ const App = () => {
   const [query, setQuery] = useState([]);
   useEffect(() => {
     getRecipes();
+    // eslint-disable-next-line
   }, [query]);
 
   const getRecipes = async () => {
