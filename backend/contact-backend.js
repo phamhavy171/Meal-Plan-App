@@ -27,7 +27,7 @@ router.post('/send', (req, res, next) => {
 	var name = req.body.name;
 	var email = req.body.email;
 	var message = req.body.message;
-	var content = `name: ${name} \n email: ${email} \n message: ${message} `;
+	var content = `name: ${name} \nemail: ${email} \nmessage: ${message} `;
 
 	var mail = {
 		from: name,
@@ -46,23 +46,22 @@ router.post('/send', (req, res, next) => {
 				status: 'success',
 			});
 		}
-	});
-
-	transporter.sendMail(
-		{
-			from: 'mealplanapptest@gmail.com',
-			to: email,
-			subject: 'Submission was successful',
-			text: `Thank you for contacting us!\n\nForm details\nName: ${name} \n email: ${email} \n message: ${message}`,
-		},
-		function (error, info) {
-			if (error) {
-				console.log(error);
-			} else {
-				console.log('Message sent: ' + info.response);
-			}
-		}
-	);
+  });
+  transporter.sendMail(
+    {
+      from: 'mealplanapptest@gmail.com',
+      to: email,
+      subject: 'Submission was successful',
+      text: `Thank you for contacting us!\n\nForm details\nName: ${name}\nEmail: ${email}\nMessage: ${message}`,
+    },
+    function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Message sent: ' + info.response);
+      }
+    }
+  );
 });
 
 const app = express();
