@@ -47,6 +47,22 @@ router.post('/send', (req, res, next) => {
 			});
 		}
 	});
+
+	transporter.sendMail(
+		{
+			from: 'mealplanapptest@gmail.com',
+			to: email,
+			subject: 'Submission was successful',
+			text: `Thank you for contacting us!\n\nForm details\nName: ${name} \n email: ${email} \n message: ${message}`,
+		},
+		function (error, info) {
+			if (error) {
+				console.log(error);
+			} else {
+				console.log('Message sent: ' + info.response);
+			}
+		}
+	);
 });
 
 const app = express();
