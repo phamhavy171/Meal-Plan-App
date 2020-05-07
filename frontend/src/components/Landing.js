@@ -1,8 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import ContactForm from "./ContactForm";
-import Login from "./Login";
-import Signup from "./Signup";
+import Form from "./Form";
 
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -23,12 +21,6 @@ export default function App() {
             <Nav.Link>
               <Link to="/form">Contact us</Link>
             </Nav.Link>
-            <Nav.Link>
-              <Link to="/login">Log in</Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link to="/signup">Sign Up</Link>
-            </Nav.Link>
           </Nav>
         </Navbar>
 
@@ -41,12 +33,6 @@ export default function App() {
           </Route>
           <Route path="/">
             <Home />
-          </Route>
-          <Route path="/login">
-            <LoginPage />
-          </Route>
-          <Route path="/signup">
-            <SignupPage />
           </Route>
         </Switch>
       </div>
@@ -63,11 +49,5 @@ function About() {
 }
 
 function Contact() {
-  return <ContactForm />;
-}
-function LoginPage() {
-  return <Login />;
-}
-function SignupPage() {
-  return <Signup />;
+  return <Form />;
 }
