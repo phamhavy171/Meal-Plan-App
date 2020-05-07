@@ -1,64 +1,64 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var nodemailer = require('nodemailer');
-var cors = require('cors');
-const creds = require('./contact-config');
+var nodemailer = require("nodemailer");
+var cors = require("cors");
+const creds = require("./contact-config");
 
 var transport = {
-	host: 'smtp.gmail.com', // Don’t forget to replace with the SMTP host of your provider
-	port: 587,
-	auth: {
-		user: creds.USER,
-		pass: creds.PASS,
-	},
+  host: "smtp.gmail.com", // Don’t forget to replace with the SMTP host of your provider
+  port: 587,
+  auth: {
+    user: creds.USER,
+    pass: creds.PASS,
+  },
 };
 
 var transporter = nodemailer.createTransport(transport);
 
 transporter.verify((error, success) => {
-	if (error) {
-		console.log(error);
-	} else {
-		console.log('Server is ready to take messages');
-	}
+  if (error) {
+    console.log(error);
+  } else {
+    console.log("Server is ready to take messages");
+  }
 });
 
-router.post('/send', (req, res, next) => {
-	var name = req.body.name;
-	var email = req.body.email;
-	var message = req.body.message;
-	var content = `name: ${name} \nemail: ${email} \nmessage: ${message} `;
+router.post("/send", (req, res, next) => {
+  var name = req.body.name;
+  var email = req.body.email;
+  var message = req.body.message;
+  var content = `name: ${name} \nemail: ${email} \nmessage: ${message} `;
 
-	var mail = {
-		from: name,
-		to: 'mealplanapptest@gmail.com', // Change to email address that you want to receive messages on
-		subject: 'New Message from Contact Form',
-		text: content,
-	};
+  var mail = {
+    from: name,
+    to: "mealplanapptest@gmail.com", // Change to email address that you want to receive messages on
+    subject: "New Message from Contact Form",
+    text: content,
+  };
 
-	transporter.sendMail(mail, (err, data) => {
-		if (err) {
-			res.json({
-				status: 'fail',
-			});
-		} else {
-			res.json({
-				status: 'success',
-			});
-		}
+  transporter.sendMail(mail, (err, data) => {
+    if (err) {
+      res.json({
+        status: "fail",
+      });
+    } else {
+      res.json({
+        status: "success",
+      });
+    }
   });
   transporter.sendMail(
     {
-      from: 'mealplanapptest@gmail.com',
+      from: "mealplanapptest@gmail.com",
       to: email,
-      subject: 'Submission was successful',
+      subject: "Submission was successful",
       text: `Thank you for contacting us!\n\nForm details\nName: ${name}\nEmail: ${email}\nMessage: ${message}`,
     },
     function (error, info) {
       if (error) {
         console.log(error);
       } else {
-        console.log('Message sent: ' + info.response);
+        console.log("Message sent: " + info.response);
       }
     }
   );
@@ -67,5 +67,5 @@ router.post('/send', (req, res, next) => {
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use('/', router);
+app.use("/", router);
 app.listen(5000);

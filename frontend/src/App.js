@@ -1,19 +1,12 @@
 import React from "react";
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+import Landing from "./components/Landing";
 
-import ContactForm from "./components/ContactForm";
-import Signup from "./components/Signup";
-import Login from "./components/Login";
-
-function App() {
+const App = () => {
   return (
     <div>
-      <ContactForm />
-      <Signup />
-      <Login />
+      <Landing />
     </div>
   );
-}
+};
 
 export default App;
