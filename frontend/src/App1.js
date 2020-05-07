@@ -1,10 +1,10 @@
 import React from "react";
-import HomePage from "./components/Landing";
+import Landing from "./components/Landing";
 
 const App1 = () => {
   return (
     <div>
-      <HomePage />
+      <Landing />
     </div>
   );
 };
