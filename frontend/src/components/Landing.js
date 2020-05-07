@@ -6,6 +6,7 @@ import Signup from "./Signup";
 
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import SearchPage from "./SearchPage";
 
 export default function Landing() {
   return (
@@ -29,6 +30,9 @@ export default function Landing() {
             <Nav.Link>
               <Link to="/signup">Sign up</Link>
             </Nav.Link>
+            <Nav.Link>
+              <Link to="/search">Search recipes</Link>
+            </Nav.Link>
           </Nav>
         </Navbar>
 
@@ -44,6 +48,9 @@ export default function Landing() {
           </Route>
           <Route path="/signup">
             <SignupPage />
+          </Route>
+          <Route path="/search">
+            <Search />
           </Route>
           <Route path="/">
             <Home />
@@ -65,9 +72,15 @@ function About() {
 function Contact() {
   return <ContactForm />;
 }
+
 function LoginPage() {
   return <Login />;
 }
+
 function SignupPage() {
   return <Signup />;
+}
+
+function Search() {
+  return <SearchPage />
 }
