@@ -8,18 +8,23 @@ const SearchPage = () => {
 	const [recipes, setRecipes] = useState([]);
 	const [search, setSearch] = useState('');
 	const [query, setQuery] = useState('');
+	const [diet, setDiet] = useState('');
 
 	useEffect(() => {
 		getRecipes();
-	}, [query]);
+	}, [query, diet]);
 
 	const getRecipes = async () => {
 		const response = await fetch(
-      `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=3&calories=150&health=alcohol-free`
+			`https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=3&health=alcohol-free&diet=${diet}`
 		);
-    const data = await response.json();
-    console.log(data.hits);
+		const data = await response.json();
+		console.log(data.hits);
 		setRecipes(data.hits);
+	};
+
+	const updateDiet = (e) => {
+		setDiet(e.target.value);
 	};
 
 	const updateSearch = (e) => {
@@ -29,7 +34,9 @@ const SearchPage = () => {
 	const getSearch = (e) => {
 		e.preventDefault();
 		setQuery(search);
+		setDiet(diet);
 		setSearch('');
+		setDiet('');
 	};
 
 	return (
@@ -41,6 +48,15 @@ const SearchPage = () => {
 					value={search}
 					onChange={updateSearch}
 				/>
+				<select value={diet} onChange={updateDiet}>
+					<option value="none"></option>
+					<option value="Balanced">Balanced</option>
+					<option value="High-Fiber">High-Fiber</option>
+					<option value="High-Protein">High-Protein</option>
+					<option value="Low-Carb">Low-Carb</option>
+					<option value="Low-Fat">Low-Fat</option>
+					<option value="Low-Sodium"></option>
+				</select>
 				<button className="search-button" type="submit">
 					submit
 				</button>
@@ -52,9 +68,8 @@ const SearchPage = () => {
 						title={recipe.recipe.label}
 						calories={recipe.recipe.calories}
 						image={recipe.recipe.image}
-            ingredients={recipe.recipe.ingredients}
-            url={recipe.recipe.url}
-            healthLabels={recipe.recipe.healthLabels}
+						ingredients={recipe.recipe.ingredients}
+						healthLabels={recipe.recipe.healthLabels}
 					/>
 				))}
 			</div>
