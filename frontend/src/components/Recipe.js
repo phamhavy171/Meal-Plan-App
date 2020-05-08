@@ -1,14 +1,6 @@
 import React from 'react';
 
-const Recipe = ({
-	title,
-	calories,
-	image,
-	ingredients,
-	url,
-	healthLabels,
-	dietLabels,
-}) => {
+const Recipe = ({ title, calories, image, ingredients,  healthLabels }) => {
 	return (
 		<div>
 			<h1>{title}</h1>
@@ -19,12 +11,6 @@ const Recipe = ({
 					<li>{ingredient.text}</li>
 				))}
 			</ul>
-			<p>{url}</p>
-			{/* <ul>
-				{dietLabels.map((dietLabel) => (
-					<li>{dietLabel}</li>
-				))}
-			</ul> */}
 			<ul>
 				{healthLabels.map((healthLabel) => (
 					<li>{healthLabel}</li>
