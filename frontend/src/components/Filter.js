@@ -4,7 +4,7 @@ import Recipe from './Recipe';
 const APP_ID = 'dcd2ff3e';
 const APP_KEY = '34c2380ac6cb8b04f580a3e848986ecd';
 
-class SearchPage extends Component {
+class Filter extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -57,7 +57,6 @@ class SearchPage extends Component {
 
 	getDiet(e) {
 		this.setState({
-			// diet: e.target.value.toLowerCase(),
 			diet: e.target.value,
 		});
 	}
@@ -125,4 +124,4 @@ class SearchPage extends Component {
 	}
 }
 
-export default SearchPage;
+export default Filter;
