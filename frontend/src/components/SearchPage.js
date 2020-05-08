@@ -22,6 +22,18 @@ class SearchPage extends Component {
 	}
 
 	getUrl() {
+		if (this.state.diet === '' && this.state.health === '') {
+			return `https://api.edamam.com/search?q=${this.state.query}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=3`;
+		}
+
+		if (this.state.diet === '') {
+			return `https://api.edamam.com/search?q=${this.state.query}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=3&health=${this.state.health}`;
+		}
+
+		if (this.state.health === '') {
+			return `https://api.edamam.com/search?q=${this.state.query}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=3&diet=${this.state.diet}`;
+		}
+
 		return `https://api.edamam.com/search?q=${this.state.query}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=3&health=${this.state.health}&diet=${this.state.diet}`;
 	}
 
@@ -38,7 +50,7 @@ class SearchPage extends Component {
 			})
 			.catch((err) => {
 				console.log(
-					`An error has occured while fetching data from Edamam ${err}`
+					`An error has occurred while fetching data from Edamam ${err}`
 				);
 			});
 	}
