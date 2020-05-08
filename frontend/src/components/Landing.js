@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import ContactForm from './ContactForm';
 import Login from './Login';
 import Signup from './Signup';
+import Filter from './Filter';
 
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import Filter from './Filter';
 
 export default function Landing() {
 	return (
@@ -17,6 +17,9 @@ export default function Landing() {
 					<Nav className="mr-auto">
 						<Nav.Link>
 							<Link to="/">Home</Link>
+						</Nav.Link>
+						<Nav.Link>
+							<Link to="/filter">Filter</Link>
 						</Nav.Link>
 						<Nav.Link>
 							<Link to="/about">About</Link>
@@ -30,15 +33,15 @@ export default function Landing() {
 						<Nav.Link>
 							<Link to="/signup">Sign up</Link>
 						</Nav.Link>
-						<Nav.Link>
-							<Link to="/filter">Filter recipes</Link>
-						</Nav.Link>
 					</Nav>
 				</Navbar>
 
 				<Switch>
 					<Route path="/about">
 						<About />
+					</Route>
+					<Route path="/filter">
+						<FilterPage />
 					</Route>
 					<Route path="/form">
 						<Contact />
@@ -48,9 +51,6 @@ export default function Landing() {
 					</Route>
 					<Route path="/signup">
 						<SignupPage />
-					</Route>
-					<Route path="/filter">
-						<Filter />
 					</Route>
 					<Route path="/">
 						<Home />
@@ -81,6 +81,6 @@ function SignupPage() {
 	return <Signup />;
 }
 
-function Search() {
+function FilterPage() {
 	return <Filter />;
 }

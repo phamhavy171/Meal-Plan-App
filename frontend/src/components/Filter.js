@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Recipe from './Recipe';
 
 const APP_ID = 'dcd2ff3e';
 const APP_KEY = '34c2380ac6cb8b04f580a3e848986ecd';
 
-class Filter extends Component {
+class Filter extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -52,6 +52,7 @@ class Filter extends Component {
 				console.log(
 					`An error has occurred while fetching data from Edamam ${err}`
 				);
+				alert('Something went wrong. Please try again.');
 			});
 	}
 
@@ -102,7 +103,7 @@ class Filter extends Component {
 						<option value="sugar-conscious">Sugar-Conscious</option>
 					</select>
 					<button className="search-button" type="submit">
-						Search
+						Filter
 					</button>
 				</form>
 				<div className="recipes">
