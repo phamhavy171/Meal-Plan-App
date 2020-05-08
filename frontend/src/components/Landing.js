@@ -1,11 +1,14 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Form from "./Form";
+import ContactForm from "./ContactForm";
+import Login from "./Login";
+import Signup from "./Signup";
+import Filter from "./Filter";
 
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
-export default function App() {
+export default function Landing() {
   return (
     <Router>
       <div>
@@ -16,10 +19,19 @@ export default function App() {
               <Link to="/">Home</Link>
             </Nav.Link>
             <Nav.Link>
+              <Link to="/filter">Filter</Link>
+            </Nav.Link>
+            <Nav.Link>
               <Link to="/about">About</Link>
             </Nav.Link>
             <Nav.Link>
               <Link to="/form">Contact us</Link>
+            </Nav.Link>
+            <Nav.Link>
+              <Link to="/login">Log in</Link>
+            </Nav.Link>
+            <Nav.Link>
+              <Link to="/signup">Sign up</Link>
             </Nav.Link>
           </Nav>
         </Navbar>
@@ -28,8 +40,17 @@ export default function App() {
           <Route path="/about">
             <About />
           </Route>
+          <Route path="/filter">
+            <FilterPage />
+          </Route>
           <Route path="/form">
             <Contact />
+          </Route>
+          <Route path="/login">
+            <LoginPage />
+          </Route>
+          <Route path="/signup">
+            <SignupPage />
           </Route>
           <Route path="/">
             <Home />
@@ -49,5 +70,14 @@ function About() {
 }
 
 function Contact() {
-  return <Form />;
+  return <ContactForm />;
+}
+function LoginPage() {
+  return <Login />;
+}
+function SignupPage() {
+  return <Signup />;
+}
+function FilterPage() {
+  return <Filter />;
 }
