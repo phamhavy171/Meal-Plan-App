@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
-import App1 from "./App1";
+import Filter from "Filter";
+import Calorie from "Calorie";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
-ReactDOM.render(<App1 />, document.getElementById("root"));
+ReactDOM.render(<Calorie />, document.getElementById("root"));
