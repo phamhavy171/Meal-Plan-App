@@ -48,7 +48,7 @@ class Login extends Component {
             Sign In
           </Button>
           <p className="forgot-password text-right">
-            Forgot <a>password?</a>
+            Forgot <a href="#">password?</a>
           </p>
         </form>
       </Container>

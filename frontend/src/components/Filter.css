@@ -1,0 +1,21 @@
+.filter {
+  display: grid;
+  justify-items: center;
+  padding-top: 50px;
+}
+.filter-input,
+.search-button {
+  margin: 0 10px 0 10px;
+  border-radius: 5px;
+  box-shadow: none;
+}
+.calo,
+.search-button {
+  background-color: green;
+  color: white;
+  border: none;
+}
+.search-button {
+  padding: 5px 20px;
+  margin: 10px;
+}
