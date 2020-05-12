@@ -1,162 +1,128 @@
 import React, { Component } from 'react';
-import Avatar from 'react-avatar-edit';
+import axios from 'axios';
 
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import Image from 'react-bootstrap/Image';
 
 class Profile extends Component {
   constructor(props) {
     super(props);
-    const src = '../example.jpg';
+    const src = '../blank-profile-picture-973460_640.png';
     this.state = {
-      preview: null,
       src,
+      id: '',
+      name: '',
+      age: '',
+      weight: '',
     };
-
-    this.onCrop = this.onCrop.bind(this);
-
-    this.onClose = this.onClose.bind(this);
   }
 
-  onClose() {
-    this.setState({ preview: null });
-  }
-
-  onCrop(preview) {
-    this.setState({ preview });
-  }
-
-  state = {
-    name: '',
-    age: '',
-    weight: '',
+  onNameChange = event => {
+    this.setState({
+      name: event.target.value,
+    });
   };
 
-  changeHandler = event => {
+  onAgeChange = event => {
     this.setState({
-      [event.target.name]: event.target.value,
+      age: event.target.value,
+    });
+  };
+
+  onWeightChange = event => {
+    this.setState({
+      weight: event.target.value,
+    });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    console.log(this.state);
+
+    axios.post('http://localhost:3001/users/').then(response => {
+      console.log(response.data);
     });
   };
 
   render() {
     return (
       <Container className="mt-5">
-        <div>
-          <Avatar
-            width={250}
-            height={250}
-            onCrop={this.onCrop}
-            onClose={this.onClose}
-            src={this.state.src}
-          />
-          <img src={this.state.preview} alt="Preview" />
-        </div>
-
         <Col md={{ span: 8, offset: 2 }}>
-          <Form>
-            <Form.Group>
-              <Form.Label>
-                Name<p>{this.state.name}</p>
-              </Form.Label>
-              <Form.Control
-                type="text"
-                name="name"
-                id="name"
-                placeholder="Enter name"
-                onChange={this.changeHandler}
-                required
+          <div>{this.state.id}            
+            <Form>
+            <div className="mb-5">
+                <Image
+                  width={170}
+                  height={170}
+                  src={this.state.src}
+                  roundedCircle
+                  // Image by <a href="https://pixabay.com/users/WandererCreative-855399/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=973460">Stephanie Edwards</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=973460">Pixabay</a>
+                  style={{ display: "grid", justifyItems: "center", alignItems: "center" }}
               />
-            </Form.Group>
+            </div>
+              <Form.Group style={{ position: "relative"}}>
+                <Button style={{ position: "absolute", right: "0", top: "-10px"}}>edit</Button>
+                <Form.Label>
+                  Name:
+                </Form.Label>
+                <p style={{borderBottom: "1px dotted black"}}>{this.state.name}</p>
+                {/* <Form.Control
+                  type="text"
+                  name="name"
+                  id="name"
+                  placeholder="Enter name"
+                  value={this.state.name}
+                  onChange={this.onNameChange.bind(this)}
+                  required
+                /> */}
+              </Form.Group>
 
-            <Form.Group>
-              <Form.Label>
-                Age<p>{this.state.age}</p>
-              </Form.Label>
-              <Form.Control
-                type="number"
-                name="age"
-                id="age"
-                placeholder="Enter age"
-                onChange={this.changeHandler}
-                required
-              />
-            </Form.Group>
+              <Form.Group style={{ position: "relative"}}>
+                <Button style={{ position: "absolute", right: "0", top: "-10px"}}>edit</Button>
+                <Form.Label>
+                  Age:
+                </Form.Label>
+                <p style={{borderBottom: "1px dotted black"}}>{this.state.age}</p>
+                {/* <Form.Control
+                  type="number"
+                  name="age"
+                  id="age"
+                  placeholder="Enter age"
+                  value={this.state.age}
+                  onChange={this.onAgeChange.bind(this)}
+                  required
+                /> */}
+              </Form.Group>
 
-            <Form.Group>
-              <Form.Label>
-                Weight (optional)<p>{this.state.weight}</p>
-              </Form.Label>
-              <Form.Control
-                type="number"
-                name="weight"
-                id="weight"
-                placeholder="Enter weight"
-                onChange={this.changeHandler}
-              />
-            </Form.Group>
+              <Form.Group style={{ position: "relative"}}>
+                <Button style={{ position: "absolute", right: "0", top: "-10px"}}>edit</Button>
+                <Form.Label>
+                  Weight (optional):
+                </Form.Label>
+                <p style={{borderBottom: "1px dotted black"}}>{this.state.weight}</p>
+                {/* <Form.Control
+                  type="number"
+                  name="weight"
+                  id="weight"
+                  placeholder="Enter weight"
+                  value={this.state.weight}
+                  onChange={this.onWeightChange.bind(this)}
+                /> */}
+              </Form.Group>
 
-            <Button type="submit" className="mb-5">
-              Save
-            </Button>
-          </Form>
-          <h2>Recipe History</h2>
+              <Button type="submit" className="mb-5" onClick={this.handleSubmit.bind(this)} method="POST">
+                Save
+              </Button>
+            </Form>
+            <h2>Recipe History</h2>
+          </div>
         </Col>
       </Container>
     );
   }
 }
-
-// const Profile = () => {
-//   return (
-//     <Container className="mt-5">
-//       <Col md={{ span: 8, offset: 2 }}>
-//         <Form>
-//           <Form.Group>
-//             <Form.Label>Name</Form.Label>
-//             <Form.Control
-//               type="text"
-//               name="name"
-//               id="name"
-//               placeholder="Enter name"
-
-//               // onChange={this.onNameChange.bind(this)}
-//             />
-//           </Form.Group>
-
-//           <Form.Group>
-//             <Form.Label>Age</Form.Label>
-//             <Form.Control
-//               type="number"
-//               name="age"
-//               id="age"
-//               placeholder="Enter age"
-
-//               // onChange={this.onNameChange.bind(this)}
-//             />
-//           </Form.Group>
-
-//           <Form.Group>
-//             <Form.Label>Weight</Form.Label>
-//             <Form.Control
-//               type="number"
-//               name="weight"
-//               id="weight"
-//               placeholder="Enter weight"
-
-//               // onChange={this.onNameChange.bind(this)}
-//             />
-//           </Form.Group>
-
-//           <Button type="submit" className="mb-5">
-//             Save
-//           </Button>
-//         </Form>
-//         <h2>Recipe History</h2>
-//       </Col>
-//     </Container>
-//   );
-// };
 
 export default Profile;

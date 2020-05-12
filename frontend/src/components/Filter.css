@@ -1,0 +1,36 @@
+.filter {
+  display: grid;
+  justify-items: center;
+  padding-top: 50px;
+}
+.filter-input {
+  margin: 0 0 0 10px;
+  border-radius: 5px;
+  box-shadow: none;
+}
+
+.calo,
+.search-button {
+  background-color: limegreen;
+  color: white;
+  border: none;
+  padding: 5px 20px;
+  box-shadow: none;
+  border-radius: 5px;
+}
+.calo:hover,
+.search-button:hover {
+  background-color: green;
+}
+
+.calo:focus,
+.search-button:focus {
+  background-color: green;
+}
+.search-button {
+  margin-top: 10px;
+}
+.filter h1 {
+  color: green;
+  padding: 20px;
+}
