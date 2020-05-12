@@ -26,18 +26,18 @@ class Filter extends React.Component {
   getUrl() {
     const caloRange = this.state.name;
     if (this.state.diet === "" && this.state.health === "") {
-      return `https://api.edamam.com/search?q=${this.state.query}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=3&calories=${caloRange}`;
+      return `https://api.edamam.com/search?q=${this.state.query}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=8&calories=${caloRange}`;
     }
 
     if (this.state.diet === "") {
-      return `https://api.edamam.com/search?q=${this.state.query}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=3&calories=${caloRange}&health=${this.state.health}`;
+      return `https://api.edamam.com/search?q=${this.state.query}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=8&calories=${caloRange}&health=${this.state.health}`;
     }
 
     if (this.state.health === "") {
-      return `https://api.edamam.com/search?q=${this.state.query}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=3&calories=${caloRange}&diet=${this.state.diet}`;
+      return `https://api.edamam.com/search?q=${this.state.query}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=8&calories=${caloRange}&diet=${this.state.diet}`;
     }
 
-    return `https://api.edamam.com/search?q=${this.state.query}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=3&calories=${caloRange}&health=${this.state.health}&diet=${this.state.diet}`;
+    return `https://api.edamam.com/search?q=${this.state.query}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=8&calories=${caloRange}&health=${this.state.health}&diet=${this.state.diet}`;
   }
 
   getRecipes(e) {
@@ -49,13 +49,17 @@ class Filter extends React.Component {
         scope.setState({
           recipes: data.hits,
         });
+        if (data.hits.length === 0) {
+          alert("Oops, no recipes found according to your search requirements");
+        }
         console.log(data.hits);
       })
+
       .catch((err) => {
         console.log(
           `An error has occurred while fetching data from Edamam ${err}`
         );
-        alert("Something went wrong. Please try again.");
+        alert("Please choose calorie range");
       });
   }
 
@@ -82,23 +86,24 @@ class Filter extends React.Component {
 
   render() {
     return (
-      <div className="filter">
-        <form onSubmit={this.getRecipes} className="search-form">
-          <label>
-            Key ingredient:
-            <input
-              className="filter-input"
-              type="text"
-              value={this.state.query}
-              onChange={this.getQuery}
-              placeholder="Search for something"
-              required
-            />
-          </label>
-          <br />
-          <br />
-          <label>
-            Choose calorie input:
+      <div>
+        <div className="filter">
+          <h1>Search for recipes</h1>
+          <form onSubmit={this.getRecipes} className="search-form">
+            <label>
+              Key ingredient:
+              <input
+                className="filter-input"
+                type="text"
+                value={this.state.query}
+                onChange={this.getQuery}
+                placeholder="Search for something"
+                required
+              />
+            </label>
+            <br />
+            <br />
+            <label>Choose calorie input (kcal):</label>
             <input
               className="filter-input calo"
               type="button"
@@ -126,49 +131,49 @@ class Filter extends React.Component {
               value="800-1200"
               name="800-1200"
               onClick={this.getCalo}
-            />
-          </label>{" "}
-          <br />
-          <br />
-          <label>
-            Diet:
-            <select
-              className="filter-input"
-              value={this.state.diet}
-              onChange={this.getDiet}
-              required
-            >
-              <option value="none"></option>
-              <option value="balanced">Balanced</option>
-              <option value="high-protein">High-Protein</option>
-              <option value="low-carb">Low-Carb</option>
-              <option value="low-fat">Low-Fat</option>
-            </select>
-          </label>
-          <br />
-          <br />
-          <label>
-            Allergies:
-            <select
-              className="filter-input"
-              value={this.state.health}
-              onChange={this.getHealth}
-              required
-            >
-              <option value="none"></option>
-              <option value="vegan">Vegan</option>
-              <option value="vegetarian">Vegetarian</option>
-              <option value="peanut-free">Peanut-Free</option>
-              <option value="true-nut-free">Tree-Nut-Free</option>
-              <option value="alcohol-free">Alcohol-Free</option>
-              <option value="sugar-conscious">Sugar-Conscious</option>
-            </select>
-          </label>
-          <br />
-          <button className="search-button" type="submit">
-            Filter
-          </button>
-        </form>
+            />{" "}
+            <br />
+            <br />
+            <label>
+              Diet:
+              <select
+                className="filter-input"
+                value={this.state.diet}
+                onChange={this.getDiet}
+                required
+              >
+                <option value="none"></option>
+                <option value="balanced">Balanced</option>
+                <option value="high-protein">High-Protein</option>
+                <option value="low-carb">Low-Carb</option>
+                <option value="low-fat">Low-Fat</option>
+              </select>
+            </label>
+            <br />
+            <br />
+            <label>
+              Allergies:
+              <select
+                className="filter-input"
+                value={this.state.health}
+                onChange={this.getHealth}
+                required
+              >
+                <option value="none"></option>
+                <option value="vegan">Vegan</option>
+                <option value="vegetarian">Vegetarian</option>
+                <option value="peanut-free">Peanut-Free</option>
+                <option value="true-nut-free">Tree-Nut-Free</option>
+                <option value="alcohol-free">Alcohol-Free</option>
+                <option value="sugar-conscious">Sugar-Conscious</option>
+              </select>
+            </label>
+            <br />
+            <button className="search-button" type="submit">
+              Filter
+            </button>
+          </form>
+        </div>
         <div className="recipes">
           {this.state.recipes
             ? this.state.recipes.map((recipe) => (

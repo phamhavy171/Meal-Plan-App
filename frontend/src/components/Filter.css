@@ -3,19 +3,34 @@
   justify-items: center;
   padding-top: 50px;
 }
-.filter-input,
-.search-button {
-  margin: 0 10px 0 10px;
+.filter-input {
+  margin: 0 0 0 10px;
   border-radius: 5px;
   box-shadow: none;
 }
+
 .calo,
 .search-button {
-  background-color: green;
+  background-color: limegreen;
   color: white;
   border: none;
+  padding: 5px 20px;
+  box-shadow: none;
+  border-radius: 5px;
+}
+.calo:hover,
+.search-button:hover {
+  background-color: green;
+}
+
+.calo:focus,
+.search-button:focus {
+  background-color: green;
 }
 .search-button {
-  padding: 5px 20px;
-  margin: 10px;
+  margin-top: 10px;
+}
+.filter h1 {
+  color: green;
+  padding: 20px;
 }
