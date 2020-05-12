@@ -14,26 +14,28 @@ export default function Landing() {
       <div>
         <Navbar bg="light" variant="light">
           <Navbar.Brand>Meal Plan</Navbar.Brand>
-          <Nav className="mr-auto">
-            <Link to="/" className="nav-link">
-              Home
-            </Link>
-            <Link to="/filter" className="nav-link">
-              Filter
-            </Link>
-            <Link to="/about" className="nav-link">
-              About
-            </Link>
-            <Link to="/form" className="nav-link">
-              Contact us
-            </Link>
-            <Link to="/login" className="nav-link">
-              Log in
-            </Link>
-            <Link to="/signup" className="nav-link">
-              Sign up
-            </Link>
-          </Nav>
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
+              <Link to="/" className="nav-link">
+                Home
+              </Link>
+              <Link to="/filter" className="nav-link">
+                Filter
+              </Link>
+              <Link to="/about" className="nav-link">
+                About
+              </Link>
+              <Link to="/form" className="nav-link">
+                Contact us
+              </Link>
+              <Link to="/login" className="nav-link">
+                Log in
+              </Link>
+              <Link to="/signup" className="nav-link">
+                Sign up
+              </Link>
+            </Nav>
+          </Navbar.Collapse>
         </Navbar>
 
         <Switch>
