@@ -1,13 +1,13 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import ContactForm from "./ContactForm";
-import Login from "./Login";
-import Signup from "./Signup";
-import Filter from "./Filter";
-import Profile from "./Profile";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import "./Landing.css";
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import ContactForm from './ContactForm';
+import Login from './Login';
+import Signup from './Signup';
+import Filter from './Filter';
+import Profile from './Profile';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import './Landing.css';
 
 export default function Landing() {
   return (
@@ -33,11 +33,11 @@ export default function Landing() {
                 Log in
               </Link>
               <Link to="/signup" className="nav-link">
-								Sign up
+                Sign up
               </Link>
-							<Link>
-              <Link to="/profile" className="nav-link">Profile</Link>
-            </Link>
+              <Link to="/profile" className="nav-link">
+                Profile
+              </Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
@@ -57,8 +57,8 @@ export default function Landing() {
           </Route>
           <Route path="/signup">
             <SignupPage />
-					</Route>
-					<Route path="/profile">
+          </Route>
+          <Route path="/profile">
             <ProfilePage />
           </Route>
           <Route path="/">
@@ -94,4 +94,3 @@ function FilterPage() {
 function ProfilePage() {
   return <Profile />;
 }
-

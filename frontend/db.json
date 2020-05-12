@@ -8,22 +8,28 @@
       "src": "../blank-profile-picture-973460_640.png"
     },
     {
-      "id": 2
-    },
-    {
+      "name": "Tanja",
+      "age": "100",
+      "weight": "",
       "id": 3
     },
     {
+      "name": "Tanja",
+      "age": "101",
+      "weight": "",
       "id": 4
     },
     {
+      "name": "Tanja",
+      "age": "102",
+      "weight": "",
       "id": 5
     },
     {
+      "name": "TanjaH",
+      "age": "99",
+      "weight": "",
       "id": 6
-    },
-    {
-      "id": 7
     }
   ]
 }
