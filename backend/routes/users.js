@@ -1,9 +1,9 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
-// added gravatar, redirect tle
-const gravatar = require('gravatar');
+// added redirect, userController and passport tle
 const redirect = require('./redirect');
 const userController = require('../controllers/user-controllers');
+const passport = require('passport');
 
 const User = require('../models/user');
 
@@ -29,20 +29,9 @@ router.post('/register', async (req, res) => {
       throw new Error('Password must be a string.');
     }
 
-    //added avatar tle
-    const avatar = gravatar.url(req.body.email, {
-      s: '200',
-      r: 'pg',
-      d: 'mm',
-    });
-    // added name, age, avatar and weight to user + req.bodies tle
     const user = new User({
-      email: req.body.email,
-      password: req.body.password,
-      name: req.body.name,
-      age: req.body.age,
-      weight: req.body.weight,
-      avatar,
+      email,
+      password,
     });
     const persistedUser = await user.save();
 
@@ -101,6 +90,8 @@ router.post('/login', async (req, res) => {
       title: 'Login Successful',
       detail: 'Successfully validated user credentials',
     });
+    //added redirection to profile page tle
+    // res.redirect('/profile');
   } catch (err) {
     res.status(401).json({
       errors: [
@@ -113,29 +104,23 @@ router.post('/login', async (req, res) => {
     });
   }
 });
-// router.post('/getProfile', (req, res) => {
-//   const newUser = new User({
-//     name: req.body.name,
-//     age: req.body.age,
-//     weight: req.body.weight,
-//   });
-//   newUser.save().then(user => {
-//     res.json(user);
-//   });
-// });
-
-// router.post('/upDateProfile', (req, res) => {
-//   return res.json({
-//     name: req.user.name,
-//     age: req.user.age,
-//     weight: req.user.weight,
-//   });
-// });
 
 // redirect a non-loggedin-user
-router.get('/profile', (req, res) => { redirect.nonLoggedinUser, userController.profile });
+// router.get('/profile', (req, res) => {
+//   redirect.nonLoggedinUser, userController.profile;
+// });
 
-//send profile data
-router.post('./profile/send', userController.sendProfileData);
+router.patch('/profile/send/:email', async (req, res) => {
+  try {
+    const upDatedUser = await User.updateOne(
+      { email: req.params.email },
+      { $set: { name: req.body.name, age: req.body.age, weight: req.body.weight } }
+    );
+    console.log(upDatedUser);
+    res.json(upDatedUser);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
 
 module.exports = router;

@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
+import React, { Component } from 'react';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 
 class Login extends Component {
   render() {
@@ -8,7 +8,7 @@ class Login extends Component {
       <Container fluid="sm">
         <form>
           <h3
-            style={{ "text-align": "center", padding: "20px", color: "green" }}
+            style={{ 'text-align': 'center', padding: '20px', color: 'green' }}
           >
             Sign In
           </h3>
