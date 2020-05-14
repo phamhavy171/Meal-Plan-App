@@ -13,7 +13,7 @@ class SignUp extends Component {
             Sign Up
           </h3>
 
-          <div className="form-group">
+          {/* <div className="form-group">
             <label>First name</label>
             <input
               type="text"
@@ -29,7 +29,7 @@ class SignUp extends Component {
               className="form-control"
               placeholder="Last name"
             />
-          </div>
+          </div> */}
 
           <div className="form-group">
             <label>Email address</label>

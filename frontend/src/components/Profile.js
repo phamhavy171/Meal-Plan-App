@@ -42,10 +42,26 @@ class Profile extends Component {
     });
   };
 
+  // getProfile() {
+  //   var self = this;
+  //   axios
+  //     .post('http://localhost:3001/users', {})
+  //     .then(function (response) {
+  //       if (response) {
+  //         self.setState({ name: response.data.name });
+  //         self.setState({ age: response.data.age });
+  //         self.setState({ weight: response.data.weight });
+  //       }
+  //     })
+  //     .catch(function (error) {
+  //       console.log('The error is ', error);
+  //     });
+  // }
+
   getProfile() {
     var self = this;
     axios
-      .post('http://localhost:3001/users', {})
+      .post('/profile', {})
       .then(function (response) {
         if (response) {
           self.setState({ name: response.data.name });
@@ -58,11 +74,30 @@ class Profile extends Component {
       });
   }
 
+  // updateProfile = () => {
+  //   var self = this;
+  //   console.log(this.state);
+  //   axios
+  //     .post('http://localhost:3001/users', {
+  //       name: this.state.name,
+  //       age: this.state.age,
+  //       weight: this.state.weight,
+  //     })
+  //     .then(function (response) {
+  //       if (response) {
+  //         console.log(response)
+  //       }
+  //     })
+  //     .catch(function (error) {
+  //       console.log('The error is ', error);
+  //     });
+  // };
+
   updateProfile = () => {
     var self = this;
     console.log(this.state);
     axios
-      .post('http://localhost:3001/users', {
+      .post('/profile', {
         name: this.state.name,
         age: this.state.age,
         weight: this.state.weight,
@@ -143,7 +178,6 @@ class Profile extends Component {
                   variant="light"
                   style={{ position: 'absolute', right: '0', top: '-10px' }}
                 >
-                  edit
                 </Button> */}
                 <Form.Label>Weight (optional)</Form.Label>
                 <Form.Control
