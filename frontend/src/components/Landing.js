@@ -5,6 +5,8 @@ import Login from "./Login";
 import Signup from "./Signup";
 import Filter from "./Filter";
 import HomePage from "./HomePage";
+import AboutPage from "./AboutPage";
+import Profile from "./Profile";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import "./Landing.css";
@@ -35,6 +37,9 @@ export default function Landing() {
               <Link to="/signup" className="nav-link">
                 Sign up
               </Link>
+              <Link to="/profile" className="nav-link">
+                My profile
+              </Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
@@ -55,6 +60,9 @@ export default function Landing() {
           <Route path="/signup">
             <SignupPage />
           </Route>
+          <Route path="/profile">
+            <ProfilePage />
+          </Route>
           <Route path="/">
             <Home />
           </Route>
@@ -69,7 +77,7 @@ function Home() {
 }
 
 function About() {
-  return <h2>About</h2>;
+  return <AboutPage />;
 }
 
 function Contact() {
@@ -83,4 +91,7 @@ function SignupPage() {
 }
 function FilterPage() {
   return <Filter />;
+}
+function ProfilePage() {
+  return <Profile />;
 }

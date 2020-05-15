@@ -1,0 +1,39 @@
+#about {
+  height: 100%;
+  width: 100vw;
+  background: url("https://source.unsplash.com/Tmz8FThN_BE/1920x1080") center
+    center no-repeat;
+  background-attachment: fixed;
+  margin-top: 0;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.aboutContainer {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+  margin-bottom: 40px;
+}
+
+#about h2 {
+  text-align: center;
+  padding: 10px;
+}
+
+#aboutAppContainer {
+  padding: 40px 20px;
+}
+
+#howItWorksContainer {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+#aboutUsContainer {
+  margin-bottom: 0;
+  padding: 40px 20px;
+}
+
+#about Button {
+  margin-top: 20px;
+}
