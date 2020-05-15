@@ -85,7 +85,7 @@ const Profile = () => {
     console.log(updatedUserData);
 
     axios
-      .post('http://localhost:3000/users/profile/' + email, updatedUserData)
+      .post('http://localhost:5000/users/profile/send/', updatedUserData)
       .then(response => {
         console.log(response.data);
         setUpdatedUserData(response.data);
@@ -163,6 +163,7 @@ const Profile = () => {
 
               <Form.Group>
                 <Form.Label>Name</Form.Label>
+                {' '}<span>{updatedUserData.name}</span>
                 <Form.Control
                   type="text"
                   name="name"
@@ -177,6 +178,7 @@ const Profile = () => {
 
               <Form.Group>
                 <Form.Label>Age</Form.Label>
+                {' '}<span>{updatedUserData.age}</span>
                 <Form.Control
                   type="number"
                   name="age"
@@ -191,6 +193,7 @@ const Profile = () => {
 
               <Form.Group>
                 <Form.Label>Weight (optional)</Form.Label>
+                {' '}<span>{updatedUserData.weight}</span>
                 <Form.Control
                   type="number"
                   name="weight"
@@ -205,12 +208,6 @@ const Profile = () => {
               <Button type="submit" className="mb-5" method="POST" block>
                 Update profile
               </Button>
-              <div>
-                <p>{updatedUserData.email}</p>
-                <p>{updatedUserData.name}</p>
-                <p>{updatedUserData.age}</p>
-                <p>{updatedUserData.weight}</p>
-              </div>
             </Form>
             <h2>Recipe History</h2>
           </div>

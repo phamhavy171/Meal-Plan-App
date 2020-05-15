@@ -11,7 +11,7 @@
 
 .calo,
 .search-button {
-  background-color: limegreen;
+  background-color: green;
   color: white;
   border: none;
   padding: 5px 20px;
@@ -20,12 +20,12 @@
 }
 .calo:hover,
 .search-button:hover {
-  background-color: green;
+  background-color: limegreen;
 }
 
 .calo:focus,
 .search-button:focus {
-  background-color: green;
+  background-color: limegreen;
 }
 .search-button {
   margin-top: 10px;

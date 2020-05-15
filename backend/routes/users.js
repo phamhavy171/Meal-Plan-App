@@ -109,6 +109,10 @@ router.post('/login', async (req, res) => {
 // router.get('/profile', (req, res) => {
 //   redirect.nonLoggedinUser, userController.profile;
 // });
+router.get('/profile', (req, res) => {
+  console.log('nice, you got this far')
+  res.send('nice, you got this far');
+});
 
 router.patch('/profile/send/:email', async (req, res) => {
   try {

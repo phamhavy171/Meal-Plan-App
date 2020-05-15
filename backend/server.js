@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const { getSecret } = require('./secrets');
 mongoose.Promise = global.Promise;
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 var cors = require("cors");
 
 //sets up the middleware for parsing the bodies and cookies off of the requests
