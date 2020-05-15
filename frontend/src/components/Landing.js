@@ -5,6 +5,7 @@ import Login from './Login';
 import Signup from './Signup';
 import Filter from './Filter';
 import HomePage from './HomePage';
+import About from './About';
 import Profile from './Profile';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -45,7 +46,7 @@ export default function Landing() {
 
         <Switch>
           <Route path="/about">
-            <About />
+            <AboutPage />
           </Route>
           <Route path="/filter">
             <FilterPage />
@@ -75,8 +76,8 @@ function Home() {
   return <HomePage />;
 }
 
-function About() {
-  return <h2>About</h2>;
+function AboutPage() {
+  return <About />;
 }
 
 function Contact() {
