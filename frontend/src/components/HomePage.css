@@ -3,11 +3,11 @@ button {
   margin-top: 10px;
   padding: 5px 10px;
   border-radius: 5px;
-  background-color: rgb(84, 161, 84);
+  background-color: green;
   color: white;
 }
 button:hover {
-  background-color: rgb(49, 94, 49);
+  background-color: limegreen;
 }
 
 .banner-text {
@@ -18,7 +18,7 @@ button:hover {
   max-width: 80%;
 }
 h1 {
-  color: rgb(49, 94, 49);
+  color: green;
 }
 .home {
   display: grid;
