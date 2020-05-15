@@ -4,6 +4,7 @@ import ContactForm from "./ContactForm";
 import Login from "./Login";
 import Signup from "./Signup";
 import Filter from "./Filter";
+import HomePage from "./HomePage";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import "./Landing.css";
@@ -19,11 +20,11 @@ export default function Landing() {
               <Link to="/" className="nav-link">
                 Home
               </Link>
-              <Link to="/filter" className="nav-link">
-                Filter
-              </Link>
               <Link to="/about" className="nav-link">
                 About
+              </Link>
+              <Link to="/filter" className="nav-link">
+                Filter
               </Link>
               <Link to="/form" className="nav-link">
                 Contact us
@@ -64,7 +65,7 @@ export default function Landing() {
 }
 
 function Home() {
-  return <h2>Home</h2>;
+  return <HomePage />;
 }
 
 function About() {
