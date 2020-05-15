@@ -1,4 +1,3 @@
-// import React, { Component } from 'react';
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -8,30 +7,11 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
 
-// class Profile extends Component {
-//   constructor() {
-//     super();
-//     const src = '../blank-profile-picture-973460_640.png';
-//     const email = 't@t.t'
-//     this.state = {
-//       src,
-//       email,
-//       name: '',
-//       age: '',
-//       weight: '',
-//     };
-//     this.onNameChange = this.onNameChange.bind(this);
-//     this.onAgeChange = this.onAgeChange.bind(this);
-//     this.onWeightChange = this.onWeightChange.bind(this);
-//     this.updateProfileHandler = this.updateProfileHandler.bind(this);
-//     // this.getProfile = this.getProfile.bind(this);
-//   }
-
 const Profile = () => {
   // const src = '../blank-profile-picture-973460_640.png';
   const email = 't@t.t';
   const [updatedUserData, setUpdatedUserData] = useState({
-    email,
+    email: email,
     name: '',
     age: '',
     weight: '',
@@ -43,24 +23,6 @@ const Profile = () => {
       [e.target.name]: e.target.value,
     });
   };
-
-  // onNameChange = event => {
-  //   this.setState({
-  //     name: event.target.value,
-  //   });
-  // };
-
-  // onAgeChange = event => {
-  //   this.setState({
-  //     age: event.target.value,
-  //   });
-  // };
-
-  // onWeightChange = event => {
-  //   this.setState({
-  //     weight: event.target.value,
-  //   });
-  // };
 
   // getProfile() {
   //   var self = this;
@@ -85,10 +47,14 @@ const Profile = () => {
     console.log(updatedUserData);
 
     axios
-      .post('http://localhost:5000/users/profile/send/', updatedUserData)
-      .then(response => {
-        console.log(response.data);
-        setUpdatedUserData(response.data);
+      .patch('http://localhost:3001/users/3', { updatedUserData})
+      .then(function (response) {
+        if (response) {
+          console.log(response);
+        }
+      })
+      .catch(function (error) {
+        console.log('The error is ', error);
       });
   };
 
@@ -119,7 +85,6 @@ const Profile = () => {
       <Container className="mt-5">
         <Col md={{ span: 8, offset: 2 }}>
           <div>
-            {/* <Form onSubmit={this.updateProfileHandler}> */}
             <Form onSubmit={updateProfileHandler}>
               <div
                 style={{
@@ -131,7 +96,6 @@ const Profile = () => {
                 <Image
                   width={200}
                   height={200}
-                  // src={this.state.src}
                   src={'../blank-profile-picture-973460_640.png'}
                   roundedCircle
                   className="mb-5"
@@ -140,21 +104,12 @@ const Profile = () => {
               </div>
 
               <Form.Group>
-                {/* <Button
-                  variant="light"
-                  style={{ position: 'absolute', right: '0', top: '-10px' }}
-                >
-                  edit
-                </Button> */}
                 <Form.Label>Email</Form.Label>
                 <Form.Control
                   type="text"
                   name="email"
                   id="email"
                   placeholder="email"
-                  // value={this.state.email}
-                  // onChange={this.changeValueHandler}
-                  // value={this.state.email}
                   value={'t@t.t'}
                   onChange={changeValueHandler}
                   required
@@ -162,45 +117,38 @@ const Profile = () => {
               </Form.Group>
 
               <Form.Group>
-                <Form.Label>Name</Form.Label>
-                {' '}<span>{updatedUserData.name}</span>
+                <Form.Label>Name</Form.Label>{' '}
+                <span>{updatedUserData.name}</span>
                 <Form.Control
                   type="text"
                   name="name"
                   id="name"
                   placeholder="name"
-                  // value={this.state.name}
-                  // onChange={this.changeValueHandler}
                   onChange={changeValueHandler}
                   required
                 />
               </Form.Group>
 
               <Form.Group>
-                <Form.Label>Age</Form.Label>
-                {' '}<span>{updatedUserData.age}</span>
+                <Form.Label>Age</Form.Label> <span>{updatedUserData.age}</span>
                 <Form.Control
                   type="number"
                   name="age"
                   id="age"
                   placeholder="age"
-                  // value={this.state.age}
-                  // onChange={this.changeValueHandler}
                   onChange={changeValueHandler}
                   required
                 />
               </Form.Group>
 
               <Form.Group>
-                <Form.Label>Weight (optional)</Form.Label>
-                {' '}<span>{updatedUserData.weight}</span>
+                <Form.Label>Weight (optional)</Form.Label>{' '}
+                <span>{updatedUserData.weight}</span>
                 <Form.Control
                   type="number"
                   name="weight"
                   id="weight"
                   placeholder="weight"
-                  // value={this.state.weight}
-                  // onChange={this.changeValueHandler}
                   onChange={changeValueHandler}
                 />
               </Form.Group>
