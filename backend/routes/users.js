@@ -8,6 +8,20 @@ const router = express.Router();
 const User = require('../models/user');
 const initializePassport = require('../passport-config');
 
+router.use(express.urlencoded({ extended: false }));
+router.use(flash());
+router.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+router.use(passport.initialize());
+router.use(passport.session());
+
+initializePassport(passport);
+
 // Getting all
 router.get('/', async (req, res) => {
   try {
@@ -42,7 +56,7 @@ router.get('/:id', getUser, (req, res) => {
 // });
 
 // Updating one
-router.patch('/profile/:id', getUser, async (req, res) => {
+router.patch('/:id', getUser, async (req, res) => {
   if (req.body.name != null) {
     res.user.name = req.body.name;
   }
@@ -52,9 +66,9 @@ router.patch('/profile/:id', getUser, async (req, res) => {
   if (req.body.age != null) {
     res.user.age = req.body.age;
   }
-  if (req.body.password != null) {
-    res.user.password = req.body.password;
-  }
+  // if (req.body.password != null) {
+  //   res.user.password = req.body.password;
+  // }
   if (req.body.weight != null) {
     res.user.weight = req.body.weight;
   }
@@ -210,13 +224,12 @@ async function getUser(req, res, next) {
 //   }
 // });
 
-router.get('/login', checkNotAuthenticated, (req, res) => {
+router.get('/login', (req, res) => {
   res.send('Hello, I am the login page.');
 });
 
 router.post(
   '/login',
-  checkNotAuthenticated,
   passport.authenticate('local', {
     successRedirect: '/profile',
     failureRedirect: '/login',
@@ -224,11 +237,11 @@ router.post(
   })
 );
 
-router.get('/register', checkNotAuthenticated, (req, res) => {
+router.get('/register', (req, res) => {
   res.send('Hello, I am the register.');
 });
 
-router.post('/register', checkNotAuthenticated, async (req, res) => {
+router.post('/register', async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const user = new User({
@@ -241,12 +254,11 @@ router.post('/register', checkNotAuthenticated, async (req, res) => {
     const newUser = await user.save();
     res.status(201).json(newUser);
     res.redirect('/login');
-  } catch {
+  } catch (err) {
     res.status(400).json({ message: err.message });
     res.redirect('register');
   }
 });
-
 
 router.delete('/logout', (req, res) => {
   req.logOut();
@@ -259,22 +271,20 @@ router.get('/profile', checkAuthenticated, (req, res) => {
 
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
+    console.log('User is authenticated');
     return next();
   }
   res.redirect('/login');
 }
 
+//add this function to login and register when they work
 function checkNotAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
+    console.log('User is authenticated');
     return res.redirect('/profile');
   }
+  console.log('User is not authenticated');
   next();
 }
-
-initializePassport(
-  passport,
-  email => User.find(user => user.email === email),
-  id => User.find(user => user.id === id)
-);
 
 module.exports = router;

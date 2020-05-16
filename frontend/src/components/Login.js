@@ -1,12 +1,53 @@
 import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
+import axios from 'axios';
 
 class Login extends Component {
+  constructor() {
+		super();
+		this.state = {
+			email: '',
+			password: '',
+		};
+
+		this.handleInputChange = this.handleInputChange.bind(this);
+
+		this.handleSubmit = this.handleSubmit.bind(this);
+	}
+
+	handleInputChange(e) {
+		this.setState({
+			[e.target.name]: e.target.value,
+		});
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    console.log(this.state);
+
+    axios({
+      method: 'post',
+      url: 'http://localhost:5000/users/login',
+      data: {
+        email: this.state.email,
+        password: this.state.password,
+      },
+    })
+      .then(function (response) {
+        if (response) {
+          console.log(response);
+        }
+      })
+      .catch(function (error) {
+        console.log('The error is ', error);
+      });
+  }
+  
   render() {
     return (
       <Container fluid="sm">
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <h3
             style={{ 'text-align': 'center', padding: '20px', color: 'green' }}
           >
@@ -17,8 +58,11 @@ class Login extends Component {
             <label>Email address</label>
             <input
               type="email"
+              name="email"
               className="form-control"
               placeholder="Enter email"
+              onChange={this.handleInputChange}
+							value={this.state.email}
             />
           </div>
 
@@ -26,8 +70,11 @@ class Login extends Component {
             <label>Password</label>
             <input
               type="password"
+              name="password"
               className="form-control"
               placeholder="Enter password"
+              onChange={this.handleInputChange}
+							value={this.state.password}
             />
           </div>
 
@@ -44,7 +91,7 @@ class Login extends Component {
             </div>
           </div>
 
-          <Button variant="success" block>
+          <Button variant="success" block type="submit">
             Sign In
           </Button>
           <p className="forgot-password text-right">

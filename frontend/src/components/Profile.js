@@ -9,9 +9,9 @@ import Image from 'react-bootstrap/Image';
 
 const Profile = () => {
   // const src = '../blank-profile-picture-973460_640.png';
-  const email = 't@t.t';
+  // const email = 't@t.t';
   const [updatedUserData, setUpdatedUserData] = useState({
-    email: email,
+    email: '',
     name: '',
     age: '',
     weight: '',
@@ -46,40 +46,23 @@ const Profile = () => {
     e.preventDefault();
     console.log(updatedUserData);
 
-    axios
-      .patch('http://localhost:3001/users/3', { updatedUserData})
-      .then(function (response) {
-        if (response) {
-          console.log(response);
-        }
-      })
-      .catch(function (error) {
-        console.log('The error is ', error);
-      });
+    axios({
+      method: 'patch',
+      url: 'http://localhost:5000/users/5ec02dba34431b291455d1a5',
+      data: {
+        updatedUserData
+      }
+    })
+    .then(function (response) {
+      if (response) {
+        console.log(response);
+      }
+    })
+    .catch(function (error) {
+      console.log('The error is ', error);
+    });
   };
 
-  // updateProfileHandler = e => {
-  //   e.preventDefault();
-  //   console.log(this.state);
-
-  //   axios
-  //     .post('http://localhost:3000/api/users/profile/send/:params', {
-  //       email: this.state.email,
-  //       name: this.state.name,
-  //       age: this.state.age,
-  //       weight: this.state.weight,
-  //     })
-  //     .then(function (response) {
-  //       if (response) {
-  //         console.log(response);
-  //       }
-  //     })
-  //     .catch(function (error) {
-  //       console.log('The error is ', error);
-  //     });
-  // };
-
-  // render() {
   return (
     <>
       <Container className="mt-5">
@@ -110,7 +93,7 @@ const Profile = () => {
                   name="email"
                   id="email"
                   placeholder="email"
-                  value={'t@t.t'}
+                  // value={'t@t.t'}
                   onChange={changeValueHandler}
                   required
                 />

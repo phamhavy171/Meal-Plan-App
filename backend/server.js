@@ -11,7 +11,8 @@ const flash = require('express-flash');
 const session = require('express-session');
 const methodOverride = require('method-override');
 const config = require('./db');
-// const bodyParser = require('body-parser');
+// var cors = require('cors');
+const bodyParser = require('body-parser');
 // const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 // const { getSecret } = require('./secrets');
@@ -20,13 +21,9 @@ const mongoose = require('mongoose');
 //PASSPORT INITIALIZATION
 const initializePassport = require('./passport-config');
 
-initializePassport(
-  passport,
-  email => users.find(user => user.email === email),
-  id => users.find(user => user.id === id)
-);
+initializePassport(passport);
 
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(flash());
 app.use(
   session({
@@ -38,6 +35,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
+// app.use(cors());
 
 app.use(express.json());
 
