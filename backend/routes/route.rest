@@ -1,0 +1,29 @@
+GET http://localhost:5000/users
+
+###
+
+GET http://localhost:5000/users/5ec02dba34431b291455d1a5
+
+###
+
+POST http://localhost:5000/users/register
+Content-Type: application/json
+
+{
+  "name": "x",
+  "email": "x@x.x",
+  "password": "x"
+}
+
+###
+
+DELETE http://localhost:5000/users/5ec02dba34431b291455d1a5
+
+###
+
+PATCH http://localhost:5000/users/profile/5ec04b135002ed3256067476
+Content-Type: application/json
+
+{
+  "age": 102 
+}
