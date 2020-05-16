@@ -1,59 +1,29 @@
-import React from "react";
-class Profile extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: "",
-      email: "",
-      password: "",
-      id: "",
-    };
-  }
+import React, { Component } from "react";
+import Edit from "./EditProfile";
+import View from "./ProfileView";
+import { Link } from "react-router-dom";
 
-  updateProfile() {}
+class Profile extends Component {
+  state = {
+    firstname: "",
+    lastname: "",
+  };
 
-  getProfile() {}
+  changeHandler = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
 
   render() {
     return (
-      <div className="col-md-5">
-        <div className="form-area">
-          <form role="form">
-            <br styles="clear:both" />
-            <div className="form-group">
-              <input
-                value={this.state.name}
-                type="text"
-                onChange={this.handleNameChange}
-                className="form-control"
-                placeholder="Name"
-                required
-              />
-            </div>
-            <div className="form-group">
-              <input
-                value={this.state.password}
-                type="password"
-                onChange={this.handlePasswordChange}
-                className="form-control"
-                placeholder="Password"
-                required
-              />
-            </div>
+      <div>
+        <Edit onChange={this.changeHandler} />
 
-            <button
-              type="button"
-              onClick={this.updateProfile}
-              id="submit"
-              name="submit"
-              className="btn btn-primary pull-right"
-            >
-              Update
-            </button>
-          </form>
-        </div>
+        <View firstname={this.state.firstname} lastname={this.state.lastname} />
       </div>
     );
   }
 }
+
 export default Profile;
