@@ -5,7 +5,7 @@ const passport = require('passport');
 const config = require('./db');
 const router = express.Router();
 const nodemailer = require('nodemailer');
-const cors = require('cors');
+// const cors = require('cors');
 const creds = require('./contact-config');
 const PORT = process.env.PORT || 5000;
 const users = require('./routes/users');
@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
 	res.send('Hello, I am the backend.');
 });
 
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
 app.use('/', router);
 app.listen(PORT, () => {
