@@ -11,7 +11,7 @@ const flash = require('express-flash');
 const session = require('express-session');
 const methodOverride = require('method-override');
 const config = require('./db');
-// var cors = require('cors');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 // const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
@@ -35,7 +35,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
-// app.use(cors());
+app.use(cors());
 
 app.use(express.json());
 
@@ -53,6 +53,7 @@ mongoose
 const usersRouter = require('./routes/users');
 
 app.use('/users', usersRouter);
+
 // //sets up the middleware for parsing the bodies and cookies off of the requests
 // app.use(bodyParser.json());
 // app.use(cookieParser());
@@ -81,8 +82,8 @@ app.use('/users', usersRouter);
 //LOGIN, REGISTRATION AND AUTH UNDERNEATH !!!!!!!!!
 
 app.get('/', (req, res) => {
-  res.send('Hello, I am the backend.');
-});
+    res.send('Hello, I am the backend.');
+  });
 
 // app.get('/login', checkNotAuthenticated, (req, res) => {
 //   res.send('Hello, I am the login page.');

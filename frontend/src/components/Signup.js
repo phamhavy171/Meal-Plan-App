@@ -35,6 +35,7 @@ class SignUp extends Component {
       .then(function (response) {
         if (response) {
           console.log(response);
+          alert('Sign up was successful!')
         }
       })
       .catch(function (error) {

@@ -49,7 +49,7 @@ class Login extends Component {
       <Container fluid="sm">
         <form onSubmit={this.handleSubmit}>
           <h3
-            style={{ 'text-align': 'center', padding: '20px', color: 'green' }}
+            style={{ 'textAlign': 'center', padding: '20px', color: 'green' }}
           >
             Sign In
           </h3>

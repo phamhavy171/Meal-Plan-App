@@ -224,17 +224,19 @@ async function getUser(req, res, next) {
 //   }
 // });
 
-router.get('/login', (req, res) => {
-  res.send('Hello, I am the login page.');
-});
+// router.get('/login', (req, res) => {
+//   res.send('Hello, I am the login.');
+// });
 
 router.post(
   '/login',
-  passport.authenticate('local', {
-    successRedirect: '/profile',
-    failureRedirect: '/login',
+  passport.authenticate('local'
+    , {
+    successRedirect: '/users',
+    failureRedirect: '/',
     failureFlash: true,
-  })
+    }
+  )
 );
 
 router.get('/register', (req, res) => {
@@ -253,10 +255,10 @@ router.post('/register', async (req, res) => {
     });
     const newUser = await user.save();
     res.status(201).json(newUser);
-    res.redirect('/login');
+    // res.redirect('//localhost:3000/login');
   } catch (err) {
     res.status(400).json({ message: err.message });
-    res.redirect('register');
+    // res.redirect('//localhost:3000/register');
   }
 });
 
@@ -274,17 +276,17 @@ function checkAuthenticated(req, res, next) {
     console.log('User is authenticated');
     return next();
   }
-  res.redirect('/login');
+  // res.redirect('//localhost:3000/login');
 }
 
-//add this function to login and register when they work
-function checkNotAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    console.log('User is authenticated');
-    return res.redirect('/profile');
-  }
-  console.log('User is not authenticated');
-  next();
-}
+// //add this function to login and register when they work
+// function checkNotAuthenticated(req, res, next) {
+//   if (req.isAuthenticated()) {
+//     console.log('User is authenticated');
+//     return res.redirect('/profile');
+//   }
+//   console.log('User is not authenticated');
+//   next();
+// }
 
 module.exports = router;
