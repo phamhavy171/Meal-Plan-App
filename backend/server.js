@@ -90,7 +90,7 @@ app.get('/', (req, res) => {
 // });
 
 // app.post(
-//   '/login',
+//   'users/login',
 //   checkNotAuthenticated,
 //   passport.authenticate('local', {
 //     successRedirect: '/profile',
