@@ -47,7 +47,7 @@ class ContactForm extends React.Component {
       <Container>
         <Col md={{ span: 8, offset: 2 }}>
           <h2
-            style={{ 'text-align': 'center', padding: '20px', color: 'green' }}
+            style={{ 'textAlign': 'center', padding: '20px', color: 'green' }}
           >
             Send us a message
           </h2>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from '../store';
 import jwt_decode from 'jwt-decode';
@@ -15,8 +15,6 @@ import Filter from './Filter';
 import HomePage from './HomePage';
 import About from './About';
 import Profile from './Profile';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
 import './Landing.css';
 
 if (localStorage.jwtToken) {
@@ -39,10 +37,12 @@ class Landing extends Component {
 					<div>
 						<MainNav />
             <Route exact path="/" component={HomePage}></Route>
+            <Route exact path="/about" component={About}></Route>
             <Route path="/signup" component={Signup}></Route>
             <Route path="/login" component={Login}></Route>
             <Route path="/form" component={ContactForm}></Route>
             <Route path="/filter" component={Filter}></Route>
+            <Route path="/profile" component={Profile}></Route>
 					</div>
 				</Router>
 			</Provider>
