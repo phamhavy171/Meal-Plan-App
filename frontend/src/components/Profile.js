@@ -68,11 +68,11 @@ class Profile extends Component {
 
   updateProfileHandler(e) {
     e.preventDefault();
-    console.log(this.updatedUserData);
+    console.log(this.state);
 
     axios({
       method: 'patch',
-      url: 'http://localhost:5000/api/users/5ec02dba34431b291455d1a5',
+      url: 'http://localhost:5000/api/users/5ec17e49c8afc1310e1d8731',
       data: {
         email: this.state.email,
         name: this.state.name,
