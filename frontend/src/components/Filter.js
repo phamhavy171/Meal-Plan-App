@@ -2,7 +2,6 @@ import React from 'react';
 import Recipe from './Recipe';
 import "./Filter.css";
 
-
 const APP_ID = 'dcd2ff3e';
 const APP_KEY = '34c2380ac6cb8b04f580a3e848986ecd';
 

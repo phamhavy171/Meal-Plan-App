@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { loginUser } from '../actions/authentication';
+import classnames from 'classnames';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import axios from 'axios';
 
 class Login extends Component {
-  constructor() {
+	constructor() {
 		super();
 		this.state = {
 			email: '',
 			password: '',
+			errors: {},
 		};
 
 		this.handleInputChange = this.handleInputChange.bind(this);
@@ -20,87 +24,101 @@ class Login extends Component {
 		this.setState({
 			[e.target.name]: e.target.value,
 		});
-  }
+	}
 
-  handleSubmit(e) {
-    e.preventDefault();
-    console.log(this.state);
+	handleSubmit(e) {
+		e.preventDefault();
+		const user = {
+			email: this.state.email,
+			password: this.state.password,
+		};
+		this.props.loginUser(user);
+	}
+	
+	componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push('/');
+    }
+	}
+	
+	UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push('/')
+    }
+		if (nextProps.errors) {
+			this.setState({
+				errors: nextProps.errors,
+			});
+		}
+	}
 
-    axios({
-      method: 'post',
-      url: 'http://localhost:5000/users/login',
-      data: {
-        email: this.state.email,
-        password: this.state.password,
-      },
-    })
-      .then(function (response) {
-        if (response) {
-          console.log(response);
-        }
-      })
-      .catch(function (error) {
-        console.log('The error is ', error);
-      });
-  }
-  
-  render() {
-    return (
-      <Container fluid="sm">
-        <form onSubmit={this.handleSubmit}>
-          <h3
-            style={{ 'textAlign': 'center', padding: '20px', color: 'green' }}
-          >
-            Sign In
-          </h3>
+	render() {
+		const { errors } = this.state;
+		return (
+			<Container fluid="sm">
+				<form onSubmit={this.handleSubmit}>
+					<h3>Sign In</h3>
 
-          <div className="form-group">
-            <label>Email address</label>
-            <input
-              type="email"
-              name="email"
-              className="form-control"
-              placeholder="Enter email"
-              onChange={this.handleInputChange}
+					<div className="form-group">
+						<label>Email address</label>
+						<input
+							type="email"
+							name="email"
+							className={classnames('form-control', {'is-invalid': errors.email})}
+							placeholder="Enter email"
+							onChange={this.handleInputChange}
 							value={this.state.email}
-            />
-          </div>
+						/>
+						{errors.email && (<div className="invalid-feedback">{errors.email}</div>)}
+					</div>
 
-          <div className="form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              className="form-control"
-              placeholder="Enter password"
-              onChange={this.handleInputChange}
+					<div className="form-group">
+						<label>Password</label>
+						<input
+							type="password"
+							name="password"
+							className={classnames('form-control', {'is-invalid': errors.password})}
+							placeholder="Enter password"
+							onChange={this.handleInputChange}
 							value={this.state.password}
-            />
-          </div>
+						/>
+						{errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
+					</div>
 
-          <div className="form-group">
-            <div className="custom-control custom-checkbox">
-              <input
-                type="checkbox"
-                className="custom-control-input"
-                id="customCheck1"
-              />
-              <label className="custom-control-label" htmlFor="customCheck1">
-                Remember me
-              </label>
-            </div>
-          </div>
+					<div className="form-group">
+						<div className="custom-control custom-checkbox">
+							<input
+								type="checkbox"
+								className="custom-control-input"
+								id="customCheck1"
+							/>
+							<label className="custom-control-label" htmlFor="customCheck1">
+								Remember me
+							</label>
+						</div>
+					</div>
 
-          <Button variant="success" block type="submit">
-            Sign In
-          </Button>
-          <p className="forgot-password text-right">
-            Forgot <a href="#">password?</a>
-          </p>
-        </form>
-      </Container>
-    );
-  }
+					<Button variant="info" type="submit" block>
+						Sign In
+					</Button>
+					{/* <p className="forgot-password text-right">
+						Forgot <a href="#">password?</a>
+					</p> */}
+				</form>
+			</Container>
+		);
+	}
 }
 
-export default Login;
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+	errors: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+	errors: state.errors,
+});
+
+export default connect(mapStateToProps, { loginUser })(Login);

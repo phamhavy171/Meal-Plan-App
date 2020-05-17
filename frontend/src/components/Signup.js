@@ -1,110 +1,121 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import { registerUser } from '../actions/authentication';
+import classnames from 'classnames';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import axios from 'axios';
 
 class SignUp extends Component {
-  constructor() {
-    super();
-    this.state = {
-      email: '',
-      password: '',
-    };
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+	constructor() {
+		super();
+		this.state = {
+			email: '',
+			password: '',
+			errors: {},
+		};
+		this.handleInputChange = this.handleInputChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+	}
 
-  handleInputChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-  }
+	handleInputChange(e) {
+		this.setState({
+			[e.target.name]: e.target.value,
+		});
+	}
 
-  handleSubmit(e) {
-    e.preventDefault();
-    console.log(this.state);
+	handleSubmit(e) {
+		e.preventDefault();
+		const user = {
+			email: this.state.email,
+			password: this.state.password,
+		};
+		this.props.registerUser(user, this.props.history);
+	}
 
-    axios({
-      method: 'post',
-      url: 'http://localhost:5000/users/register',
-      data: {
-        email: this.state.email,
-        password: this.state.password,
-      },
-    })
-      .then(function (response) {
-        if (response) {
-          console.log(response);
-          alert('Sign up was successful!')
-        }
-      })
-      .catch(function (error) {
-        console.log('The error is ', error);
-      });
-  }
+	UNSAFE_componentWillReceiveProps(nextProps) {
+		if (nextProps.auth.isAuthenticated) {
+			this.props.history.push('/');
+		}
+		if (nextProps.errors) {
+			this.setState({
+				errors: nextProps.errors,
+			});
+		}
+	}
 
-  render() {
-    return (
-      <Container fluid="sm">
-        <form onSubmit={this.handleSubmit}>
-          <h3
-            style={{ 'text-align': 'center', padding: '20px', color: 'green' }}
-          >
-            Sign Up
-          </h3>
+	componentDidMount() {
+		if (this.props.auth.isAuthenticated) {
+			this.props.history.push('/');
+		}
+	}
 
-          {/* <div className="form-group">
-            <label>First name</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="First name"
-            />
-          </div>
+	render() {
+		const { errors } = this.state;
+		return (
+			<Container fluid="sm">
+				<form onSubmit={this.handleSubmit}>
+					<h3
+						style={{ 'textAlign': 'center', padding: '20px', color: 'green' }}
+					>
+						Sign Up
+					</h3>
 
-          <div className="form-group">
-            <label>Last name</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Last name"
-            />
-          </div> */}
+					<div className="form-group">
+						<label>Email address</label>
+						<input
+							type="email"
+							name="email"
+							className={classnames('form-control', {
+								'is-invalid': errors.email,
+							})}
+							placeholder="Enter email"
+							onChange={this.handleInputChange}
+							value={this.state.email}
+						/>
+						{errors.email && (
+							<div className="invalid-feedback">{errors.email}</div>
+						)}
+					</div>
 
-          <div className="form-group">
-            <label>Email address</label>
-            <input
-              type="email"
-              name="email"
-              className="form-control"
-              placeholder="Enter email"
-              onChange={this.handleInputChange}
-              value={this.state.email}
-            />
-          </div>
+					<div className="form-group">
+						<label>Password</label>
+						<input
+							type="password"
+							name="password"
+							className={classnames('form-control', {
+								'is-invalid': errors.password,
+							})}
+							placeholder="Enter password"
+							onChange={this.handleInputChange}
+							value={this.state.password}
+						/>
+						{errors.password && (
+							<div className="invalid-feedback">{errors.password}</div>
+						)}
+					</div>
 
-          <div className="form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              className="form-control"
-              placeholder="Enter password"
-              onChange={this.handleInputChange}
-              value={this.state.password}
-            />
-          </div>
-
-          <Button variant="success" block type="submit">
-            Sign Up
-          </Button>
-          <p className="forgot-password text-right">
-            Already registered <a href="#">sign in?</a>
-          </p>
-        </form>
-      </Container>
-    );
-  }
+					<Button variant="success" type="submit" block>
+						Sign Up
+					</Button>
+					<p className="forgot-password text-right">
+						Already registered <a href="/login">sign in?</a>
+					</p>
+				</form>
+			</Container>
+		);
+	}
 }
 
-export default SignUp;
+SignUp.propTypes = {
+	registerUser: PropTypes.func.isRequired,
+	auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+	auth: state.auth,
+	errors: state.errors,
+});
+
+export default connect(mapStateToProps, { registerUser })(withRouter(SignUp));
