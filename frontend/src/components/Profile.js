@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import React, { useState } from 'react';
 import axios from 'axios';
 
 import Form from 'react-bootstrap/Form';
@@ -24,23 +23,6 @@ class Profile extends Component {
 
     // this.getProfileHandler = this.getProfileHandler.bind(this);
   }
-
-  // const Profile = () => {
-  //   // const src = '../blank-profile-picture-973460_640.png';
-  //   // const email = 't@t.t';
-  //   const [updatedUserData, setUpdatedUserData] = useState({
-  //     email: '',
-  //     name: '',
-  //     age: '',
-  //     weight: '',
-  //   });
-
-  // const changeValueHandler = e => {
-  //   setUpdatedUserData({
-  //     ...updatedUserData,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
 
   changeValueHandler(e) {
     this.setState({

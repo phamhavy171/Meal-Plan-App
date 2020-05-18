@@ -1,6 +1,6 @@
 import React from 'react';
 import Recipe from './Recipe';
-import "./Filter.css";
+import './Filter.css';
 
 const APP_ID = 'dcd2ff3e';
 const APP_KEY = '34c2380ac6cb8b04f580a3e848986ecd';
@@ -10,9 +10,9 @@ class Filter extends React.Component {
     super(props);
     this.state = {
       recipes: null,
-      query: "",
-      diet: "",
-      health: "",
+      query: '',
+      diet: '',
+      health: '',
     };
 
     this.getRecipes = this.getRecipes.bind(this);
@@ -25,15 +25,15 @@ class Filter extends React.Component {
 
   getUrl() {
     const caloRange = this.state.name;
-    if (this.state.diet === "" && this.state.health === "") {
+    if (this.state.diet === '' && this.state.health === '') {
       return `https://api.edamam.com/search?q=${this.state.query}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=8&calories=${caloRange}`;
     }
 
-    if (this.state.diet === "") {
+    if (this.state.diet === '') {
       return `https://api.edamam.com/search?q=${this.state.query}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=8&calories=${caloRange}&health=${this.state.health}`;
     }
 
-    if (this.state.health === "") {
+    if (this.state.health === '') {
       return `https://api.edamam.com/search?q=${this.state.query}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=8&calories=${caloRange}&diet=${this.state.diet}`;
     }
 
@@ -44,22 +44,22 @@ class Filter extends React.Component {
     e.preventDefault();
     const scope = this;
     fetch(this.getUrl())
-      .then((resp) => resp.json())
-      .then((data) => {
+      .then(resp => resp.json())
+      .then(data => {
         scope.setState({
           recipes: data.hits,
         });
         if (data.hits.length === 0) {
-          alert("Oops, no recipes found according to your search requirements");
+          alert('Oops, no recipes found according to your search requirements');
         }
         console.log(data.hits);
       })
 
-      .catch((err) => {
+      .catch(err => {
         console.log(
           `An error has occurred while fetching data from Edamam ${err}`
         );
-        alert("Please choose calorie range");
+        alert('Please choose calorie range');
       });
   }
 
@@ -131,7 +131,7 @@ class Filter extends React.Component {
               value="800-1200"
               name="800-1200"
               onClick={this.getCalo}
-            />{" "}
+            />{' '}
             <br />
             <br />
             <label>
@@ -176,7 +176,7 @@ class Filter extends React.Component {
         </div>
         <div className="recipes">
           {this.state.recipes
-            ? this.state.recipes.map((recipe) => (
+            ? this.state.recipes.map(recipe => (
                 <Recipe
                   key={recipe.recipe.label}
                   title={recipe.recipe.label}
@@ -189,7 +189,7 @@ class Filter extends React.Component {
                   serving={recipe.recipe.yield}
                 />
               ))
-            : ""}
+            : ''}
         </div>
       </div>
     );

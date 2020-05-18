@@ -7,118 +7,126 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 
 class Login extends Component {
-	constructor() {
-		super();
-		this.state = {
-			email: '',
-			password: '',
-			errors: {},
-		};
+  constructor() {
+    super();
+    this.state = {
+      email: '',
+      password: '',
+      errors: {},
+    };
 
-		this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
 
-		this.handleSubmit = this.handleSubmit.bind(this);
-	}
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-	handleInputChange(e) {
-		this.setState({
-			[e.target.name]: e.target.value,
-		});
-	}
+  handleInputChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  }
 
-	handleSubmit(e) {
-		e.preventDefault();
-		const user = {
-			email: this.state.email,
-			password: this.state.password,
-		};
-		this.props.loginUser(user);
-	}
-	
-	componentDidMount() {
+  handleSubmit(e) {
+    e.preventDefault();
+    const user = {
+      email: this.state.email,
+      password: this.state.password,
+    };
+    this.props.loginUser(user);
+  }
+
+  componentDidMount() {
     if (this.props.auth.isAuthenticated) {
       this.props.history.push('/');
     }
-	}
-	
-	UNSAFE_componentWillReceiveProps(nextProps) {
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push('/')
+      this.props.history.push('/');
     }
-		if (nextProps.errors) {
-			this.setState({
-				errors: nextProps.errors,
-			});
-		}
-	}
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors,
+      });
+    }
+  }
 
-	render() {
-		const { errors } = this.state;
-		return (
-			<Container fluid="sm">
-				<form onSubmit={this.handleSubmit}>
-					<h3>Sign In</h3>
+  render() {
+    const { errors } = this.state;
+    return (
+      <Container fluid="sm">
+        <form onSubmit={this.handleSubmit}>
+          <h3>Sign In</h3>
 
-					<div className="form-group">
-						<label>Email address</label>
-						<input
-							type="email"
-							name="email"
-							className={classnames('form-control', {'is-invalid': errors.email})}
-							placeholder="Enter email"
-							onChange={this.handleInputChange}
-							value={this.state.email}
-						/>
-						{errors.email && (<div className="invalid-feedback">{errors.email}</div>)}
-					</div>
+          <div className="form-group">
+            <label>Email address</label>
+            <input
+              type="email"
+              name="email"
+              className={classnames('form-control', {
+                'is-invalid': errors.email,
+              })}
+              placeholder="Enter email"
+              onChange={this.handleInputChange}
+              value={this.state.email}
+            />
+            {errors.email && (
+              <div className="invalid-feedback">{errors.email}</div>
+            )}
+          </div>
 
-					<div className="form-group">
-						<label>Password</label>
-						<input
-							type="password"
-							name="password"
-							className={classnames('form-control', {'is-invalid': errors.password})}
-							placeholder="Enter password"
-							onChange={this.handleInputChange}
-							value={this.state.password}
-						/>
-						{errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
-					</div>
+          <div className="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              className={classnames('form-control', {
+                'is-invalid': errors.password,
+              })}
+              placeholder="Enter password"
+              onChange={this.handleInputChange}
+              value={this.state.password}
+            />
+            {errors.password && (
+              <div className="invalid-feedback">{errors.password}</div>
+            )}
+          </div>
 
-					<div className="form-group">
-						<div className="custom-control custom-checkbox">
-							<input
-								type="checkbox"
-								className="custom-control-input"
-								id="customCheck1"
-							/>
-							<label className="custom-control-label" htmlFor="customCheck1">
-								Remember me
-							</label>
-						</div>
-					</div>
+          <div className="form-group">
+            <div className="custom-control custom-checkbox">
+              <input
+                type="checkbox"
+                className="custom-control-input"
+                id="customCheck1"
+              />
+              <label className="custom-control-label" htmlFor="customCheck1">
+                Remember me
+              </label>
+            </div>
+          </div>
 
-					<Button variant="info" type="submit" block>
-						Sign In
-					</Button>
-					{/* <p className="forgot-password text-right">
+          <Button variant="info" type="submit" block>
+            Sign In
+          </Button>
+          {/* <p className="forgot-password text-right">
 						Forgot <a href="#">password?</a>
 					</p> */}
-				</form>
-			</Container>
-		);
-	}
+        </form>
+      </Container>
+    );
+  }
 }
 
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-	errors: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   auth: state.auth,
-	errors: state.errors,
+  errors: state.errors,
 });
 
 export default connect(mapStateToProps, { loginUser })(Login);

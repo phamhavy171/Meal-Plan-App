@@ -30,6 +30,7 @@ class MainNav extends Component {
               <img
                 src={user.avatar}
                 alt="avatar"
+                title={user.name}
                 style={{
                   width: '25px',
                   marginRight: '5px',

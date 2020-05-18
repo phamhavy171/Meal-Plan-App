@@ -1,7 +1,7 @@
-import React from "react";
-import "./HomePage.css";
-import Carousel from "react-bootstrap/Carousel";
-import { Link } from "react-router-dom";
+import React from 'react';
+import './HomePage.css';
+import Carousel from 'react-bootstrap/Carousel';
+import { Link } from 'react-router-dom';
 
 const HomePage = () => {
   return (
@@ -40,7 +40,7 @@ const HomePage = () => {
         <button>
           <Link
             to="./Filter"
-            style={{ textDecoration: "none", color: "white" }}
+            style={{ textDecoration: 'none', color: 'white' }}
           >
             Search now
           </Link>

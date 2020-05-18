@@ -18,24 +18,24 @@ import Profile from './Profile';
 import './Landing.css';
 
 if (localStorage.jwtToken) {
-	setAuthToken(localStorage.jwtToken);
-	const decoded = jwt_decode(localStorage.jwtToken);
-	store.dispatch(setCurrentUser(decoded));
+  setAuthToken(localStorage.jwtToken);
+  const decoded = jwt_decode(localStorage.jwtToken);
+  store.dispatch(setCurrentUser(decoded));
 
-	const currentTime = Date.now() / 1000;
-	if (decode.exp < currentTime) {
-		store.dispatch(logoutUser());
-		window.location.href = '/login';
-	}
+  const currentTime = Date.now() / 1000;
+  if (decode.exp < currentTime) {
+    store.dispatch(logoutUser());
+    window.location.href = '/login';
+  }
 }
 
 class Landing extends Component {
-	render() {
-		return (
-			<Provider store={store}>
-				<Router>
-					<div>
-						<MainNav />
+  render() {
+    return (
+      <Provider store={store}>
+        <Router>
+          <div>
+            <MainNav />
             <Route exact path="/" component={HomePage}></Route>
             <Route exact path="/about" component={About}></Route>
             <Route path="/signup" component={Signup}></Route>
@@ -43,11 +43,11 @@ class Landing extends Component {
             <Route path="/form" component={ContactForm}></Route>
             <Route path="/filter" component={Filter}></Route>
             <Route path="/profile" component={Profile}></Route>
-					</div>
-				</Router>
-			</Provider>
-		);
-	}
+          </div>
+        </Router>
+      </Provider>
+    );
+  }
 }
 
 export default Landing;

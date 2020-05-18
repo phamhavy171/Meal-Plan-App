@@ -1,7 +1,7 @@
-import React from "react";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
-import "./Recipe.css";
+import React from 'react';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import './Recipe.css';
 
 const Recipe = ({
   title,
@@ -27,24 +27,24 @@ const Recipe = ({
     <div
       className="cards"
       style={{
-        justifyItems: "center",
+        justifyItems: 'center',
       }}
     >
       <Card
         border="light"
         style={{
-          maxWidth: "25rem",
-          display: "inline-block",
-          verticalAlign: "top",
-          margin: "30px",
-          alignItems: "center",
+          maxWidth: '25rem',
+          display: 'inline-block',
+          verticalAlign: 'top',
+          margin: '30px',
+          alignItems: 'center',
         }}
       >
         <Card.Header>
           <h4
             style={{
-              color: "green",
-              textAlign: "center",
+              color: 'green',
+              textAlign: 'center',
             }}
           >
             {title}
@@ -57,13 +57,13 @@ const Recipe = ({
             Amount of calories per serving is: {caloPerSer()} (kcal).
             <h5>Ingredients:</h5>
             <ul>
-              {ingredients.map((ingredient) => (
+              {ingredients.map(ingredient => (
                 <li>{ingredient.text}</li>
               ))}
             </ul>
             <h5>Health labels:</h5>
             <div>
-              {healthLabels.map((healthLabel) => (
+              {healthLabels.map(healthLabel => (
                 <div>{healthLabel}</div>
               ))}
             </div>
@@ -74,8 +74,8 @@ const Recipe = ({
               target="_blank"
               rel="noopener noreferrer"
               style={{
-                color: "white",
-                textDecoration: "none",
+                color: 'white',
+                textDecoration: 'none',
               }}
             >
               Get recipe now!

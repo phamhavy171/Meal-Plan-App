@@ -1,20 +1,20 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import Container from "react-bootstrap/Container";
-import Card from "react-bootstrap/Card";
-import CardDeck from "react-bootstrap/CardDeck";
-import Button from "react-bootstrap/Button";
+import Container from 'react-bootstrap/Container';
+import Card from 'react-bootstrap/Card';
+import CardDeck from 'react-bootstrap/CardDeck';
+import Button from 'react-bootstrap/Button';
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faUtensils,
   faSearch,
   faBookOpen,
   faCarrot,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
 
-import "./About.css";
+import './About.css';
 
 const About = () => {
   return (
@@ -36,7 +36,7 @@ const About = () => {
             <Card.Body>
               <FontAwesomeIcon
                 icon={faSearch}
-                style={{ fontSize: "30px", marginBottom: "15px" }}
+                style={{ fontSize: '30px', marginBottom: '15px' }}
               />
               <Card.Title>Choose Filters</Card.Title>
               <Card.Text>
@@ -49,7 +49,7 @@ const About = () => {
             <Card.Body>
               <FontAwesomeIcon
                 icon={faBookOpen}
-                style={{ fontSize: "30px", marginBottom: "15px" }}
+                style={{ fontSize: '30px', marginBottom: '15px' }}
               />
               <Card.Title>Pick Recipe</Card.Title>
               <Card.Text> Choose one recipe that you like.</Card.Text>
@@ -59,7 +59,7 @@ const About = () => {
             <Card.Body>
               <FontAwesomeIcon
                 icon={faCarrot}
-                style={{ fontSize: "30px", marginBottom: "15px" }}
+                style={{ fontSize: '30px', marginBottom: '15px' }}
               />
               <Card.Title>Cook</Card.Title>
               <Card.Text>Cook your meal following the recipe.</Card.Text>
@@ -70,7 +70,7 @@ const About = () => {
             <Card.Body>
               <FontAwesomeIcon
                 icon={faUtensils}
-                style={{ fontSize: "30px", marginBottom: "15px" }}
+                style={{ fontSize: '30px', marginBottom: '15px' }}
               />
               <Card.Title>Eat and Repeat</Card.Title>
               <Card.Text> Enjoy your meal and welcome back!</Card.Text>
@@ -83,9 +83,7 @@ const About = () => {
       </Container>
       <Container className="aboutContainer" id="aboutUsContainer">
         <h2>About Us</h2>
-        <p>
-          About Us text coming here ...
-        </p>
+        <p>About Us text coming here ...</p>
       </Container>
     </Container>
   );

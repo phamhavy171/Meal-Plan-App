@@ -46,9 +46,7 @@ class ContactForm extends React.Component {
     return (
       <Container>
         <Col md={{ span: 8, offset: 2 }}>
-          <h2
-            style={{ 'textAlign': 'center', padding: '20px', color: 'green' }}
-          >
+          <h2 style={{ textAlign: 'center', padding: '20px', color: 'green' }}>
             Send us a message
           </h2>
           <Form onSubmit={this.handleSubmit.bind(this)} method="POST">
