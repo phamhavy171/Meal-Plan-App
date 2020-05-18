@@ -19,7 +19,7 @@ class ContactForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     //console.log(this.state);
-    fetch('http://localhost:5000/send', {
+    fetch('http://localhost:3000/send', {
       method: 'POST',
       body: JSON.stringify(this.state),
       headers: {

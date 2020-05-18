@@ -72,7 +72,7 @@ class Profile extends Component {
 
     axios({
       method: 'patch',
-      url: 'http://localhost:5000/api/users/5ec17e49c8afc1310e1d8731',
+      url: 'http://localhost:3000/api/users/5ec17e49c8afc1310e1d8731',
       data: {
         email: this.state.email,
         name: this.state.name,
