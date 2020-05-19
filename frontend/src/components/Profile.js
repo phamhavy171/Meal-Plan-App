@@ -1,11 +1,32 @@
 import React, { Component } from 'react';
+// import View from './ProfileView';
+// import Edit from './EditView';
 import axios from 'axios';
+import { loginUser } from '../actions/authentication';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
+
+// const EditNow = () => {
+//   const onClick = () => {
+//     this.setState({
+//       edit: true,
+//     });
+//     return (
+//       <div>
+//         <input type="submit" value="Edit" onClick={onClick} />
+//         {Edit ? <EditPage /> : null}
+//       </div>
+//     )
+//   };
+// };
+
+// const EditPage = () => <Edit />
 
 class Profile extends Component {
   constructor() {
@@ -15,13 +36,14 @@ class Profile extends Component {
       name: '',
       age: '',
       weight: '',
+      edit: false,
     };
 
     this.changeValueHandler = this.changeValueHandler.bind(this);
 
     this.updateProfileHandler = this.updateProfileHandler.bind(this);
 
-    // this.getProfileHandler = this.getProfileHandler.bind(this);
+    //this.getProfileHandler = this.getProfileHandler.bind(this);
   }
 
   changeValueHandler(e) {
@@ -50,11 +72,11 @@ class Profile extends Component {
 
   updateProfileHandler(e) {
     e.preventDefault();
-    console.log(this.state);
+    // console.log(this.state);
 
     axios({
       method: 'patch',
-      url: 'http://localhost:3000/api/users/5ec17e49c8afc1310e1d8731',
+      url: 'http://localhost:3000/api/users/5ec2e045b381d610c7c802a1',
       data: {
         email: this.state.email,
         name: this.state.name,
@@ -72,9 +94,57 @@ class Profile extends Component {
         console.log('The error is ', error);
       });
   }
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated === false) {
+      this.props.history.push('/');
+    }
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors,
+      });
+    }
+  }
+
+  async componentDidMount() {
+    if (this.props.auth.isAuthenticated === false) {
+      this.props.history.push('/');
+    }
+
+    let accessString = localStorage.getItem('JWT');
+    if (accessString === null) {
+      this.setState({
+        isLoading: false,
+        error: true,
+      });
+    }
+
+    let self = this;
+
+    await axios
+      .get('http://localhost:3000/api/users/findUser', {
+        headers: { Authorization: `JWT ${accessString}` },
+      })
+      .then(response => {
+        self.setState({
+          id: response.data.id,
+          isLoading: false,
+          error: false,
+        });
+      })
+      .catch(error => {
+        console.log(error.data);
+      });
+  }
+
+  
+
   render() {
     return (
       <>
+        {/* <input type="submit" value="edit" onClick={this.onClick} />
+        <View />
+        <EditNow /> */}
         <Container className="mt-5">
           <Col md={{ span: 8, offset: 2 }}>
             <div>
@@ -151,16 +221,26 @@ class Profile extends Component {
                 <Button type="submit" className="mb-5" block>
                   Update profile
                 </Button>
-                {/* <Button type="submit" className="mb-5" block onClick={this.getProfileHandler}>
-                  Get profile
-                </Button> */}
               </Form>
             </div>
           </Col>
-        </Container>
+        </Container> 
       </>
     );
   }
 }
 
-export default Profile;
+Profile.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors,
+});
+
+export default connect(mapStateToProps, { loginUser })(Profile);
+
+// export default Profile;

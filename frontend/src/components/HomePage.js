@@ -10,7 +10,7 @@ const HomePage = () => {
         <Carousel>
           <Carousel.Item>
             <img
-              className="d-block mw-100 mx-auto "
+              className="d-block mw-100 mx-auto"
               src="https://source.unsplash.com/pN-o2rIv8qI"
               alt="First slide"
             />

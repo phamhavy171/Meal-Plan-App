@@ -19,9 +19,26 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Getting one
-router.get('/:id', getUser, (req, res) => {
-  res.json(res.user);
+// // Getting one
+// router.get('/:id', getUser, (req, res) => {
+//   res.json(res.user);
+// });
+
+router.get('/findUser', (req, res) => {
+  passport.authenticate('jwt', { session: false }, (err, user) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('user found in database');
+      res.status(200).send({
+        auth: true,
+        email: user.email,
+        age: user.age,
+        weight: user.weight,
+        message: 'user found in db',
+      });
+    }
+  })(req, res);
 });
 
 async function getUser(req, res, next) {
