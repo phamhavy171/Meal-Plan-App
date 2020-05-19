@@ -6,7 +6,6 @@ import Signup from "./Signup";
 import Filter from "./Filter";
 import HomePage from "./HomePage";
 import AboutPage from "./AboutPage";
-import Profile from "./Profile";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import "./Landing.css";
@@ -15,8 +14,9 @@ export default function Landing() {
   return (
     <Router>
       <div>
-        <Navbar bg="light" variant="light">
-          <Navbar.Brand>Meal Plan</Navbar.Brand>
+        <Navbar bg="light" variant="light" expand="lg">
+          <Navbar.Brand to="./home">Meal Plan</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
               <Link to="/" className="nav-link">
@@ -36,9 +36,6 @@ export default function Landing() {
               </Link>
               <Link to="/signup" className="nav-link">
                 Sign up
-              </Link>
-              <Link to="/profile" className="nav-link">
-                My profile
               </Link>
             </Nav>
           </Navbar.Collapse>
@@ -60,9 +57,7 @@ export default function Landing() {
           <Route path="/signup">
             <SignupPage />
           </Route>
-          <Route path="/profile">
-            <ProfilePage />
-          </Route>
+
           <Route path="/">
             <Home />
           </Route>
@@ -91,7 +86,4 @@ function SignupPage() {
 }
 function FilterPage() {
   return <Filter />;
-}
-function ProfilePage() {
-  return <Profile />;
 }
