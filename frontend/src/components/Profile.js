@@ -137,8 +137,6 @@ class Profile extends Component {
       });
   }
 
-  
-
   render() {
     return (
       <>
@@ -218,7 +216,7 @@ class Profile extends Component {
                   />
                 </Form.Group>
 
-                <Button type="submit" className="mb-5" block>
+                <Button type="submit" variant="success" className="mb-5" block>
                   Update profile
                 </Button>
               </Form>

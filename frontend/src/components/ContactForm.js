@@ -79,7 +79,7 @@ class ContactForm extends React.Component {
               />
             </Form.Group>
 
-            <Button variant="success" type="submit">
+            <Button variant="success" type="submit" block>
               Send
             </Button>
           </Form>
