@@ -97,7 +97,7 @@ class Filter extends React.Component {
                 type="text"
                 value={this.state.query}
                 onChange={this.getQuery}
-                placeholder="Search for something"
+                placeholder="Enter an ingredient"
                 required
               />
             </label>

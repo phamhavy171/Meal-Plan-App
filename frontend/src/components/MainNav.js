@@ -8,7 +8,6 @@ import { LinkContainer } from 'react-router-bootstrap';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavItem from 'react-bootstrap/NavItem';
-import Button from 'react-bootstrap/Button';
 
 class MainNav extends Component {
   onLogout(e) {
@@ -24,9 +23,9 @@ class MainNav extends Component {
         <LinkContainer to="/profile">
           <NavItem className="mr-5">Profile</NavItem>
         </LinkContainer>
-        <LinkContainer to="#" onClick={this.onLogout.bind(this)}>
+        <LinkContainer to="/" onClick={this.onLogout.bind(this)}>
           <NavItem className="mr-5">
-            <Button variant="light">
+            {/* <Button variant="light"> */}
               <img
                 src={user.avatar}
                 alt="avatar"
@@ -38,7 +37,7 @@ class MainNav extends Component {
                 }}
               />
               Logout
-            </Button>
+            {/* </Button> */}
           </NavItem>
         </LinkContainer>
       </Nav>

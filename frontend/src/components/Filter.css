@@ -3,13 +3,18 @@
   justify-items: center;
   padding-top: 50px;
 }
+
 .filter-input {
   margin: 0 0 0 10px;
   border-radius: 5px;
   box-shadow: none;
 }
 
-.calo,
+.search-form {
+  margin: 0 auto;
+  padding: 20px;
+}
+
 .search-button {
   background-color: green;
   color: white;
@@ -18,6 +23,7 @@
   box-shadow: none;
   border-radius: 5px;
 }
+
 .calo:hover,
 .search-button:hover {
   background-color: limegreen;
@@ -27,9 +33,11 @@
 .search-button:focus {
   background-color: limegreen;
 }
+
 .search-button {
   margin-top: 10px;
 }
+
 .filter h1 {
   color: green;
   padding: 20px;

@@ -36,14 +36,12 @@ class Profile extends Component {
       name: '',
       age: '',
       weight: '',
-      edit: false,
+      // edit: false,
     };
 
     this.changeValueHandler = this.changeValueHandler.bind(this);
 
     this.updateProfileHandler = this.updateProfileHandler.bind(this);
-
-    //this.getProfileHandler = this.getProfileHandler.bind(this);
   }
 
   changeValueHandler(e) {
@@ -51,24 +49,6 @@ class Profile extends Component {
       [e.target.name]: e.target.value,
     });
   }
-
-  // getProfileHandler() {
-  //   var self = this;
-  //   axios
-  //     .get('http://localhost:5000/users/ec10c45686f470810478f11', {})
-  //     .then(function (response) {
-  //       console.log(response);
-  //       if (response) {
-  //         self.setState({ email: response.data.email });
-  //         self.setState({ name: response.data.name });
-  //         self.setState({ age: response.data.age });
-  //         self.setState({ weight: response.data.weight });
-  //       }
-  //     })
-  //     .catch(function (error) {
-  //       console.log('The error is ', error);
-  //     });
-  // }
 
   updateProfileHandler(e) {
     e.preventDefault();
@@ -143,7 +123,7 @@ class Profile extends Component {
         {/* <input type="submit" value="edit" onClick={this.onClick} />
         <View />
         <EditNow /> */}
-        <Container className="mt-5">
+        <Container>
           <Col md={{ span: 8, offset: 2 }}>
             <div>
               <Form onSubmit={this.updateProfileHandler}>
@@ -158,20 +138,20 @@ class Profile extends Component {
                     width={150}
                     height={150}
                     src={'../blank-profile-picture-973460_640.png'}
-                    roundedCircle
-                    className="mb-5"
+                    style={{ padding: '20px', borderRadius: '25px' }}
                     // Image by <a href="https://pixabay.com/users/WandererCreative-855399/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=973460">Stephanie Edwards</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=973460">Pixabay</a>
                   />
                 </div>
 
                 <Form.Group>
                   <Form.Label>Email</Form.Label> <span>{this.state.email}</span>
+                  {/* <Button>Edit</Button> */}
                   <Form.Control
                     type="text"
                     name="email"
                     id="email"
                     value={this.state.email}
-                    placeholder="email"
+                    placeholder="Enter email"
                     onChange={this.changeValueHandler}
                     required
                   />
@@ -184,7 +164,7 @@ class Profile extends Component {
                     name="name"
                     id="name"
                     value={this.state.name}
-                    placeholder="name"
+                    placeholder="Enter name"
                     onChange={this.changeValueHandler}
                     required
                   />
@@ -197,7 +177,7 @@ class Profile extends Component {
                     name="age"
                     id="age"
                     value={this.state.age}
-                    placeholder="age"
+                    placeholder="Enter age"
                     onChange={this.changeValueHandler}
                     required
                   />
@@ -211,7 +191,7 @@ class Profile extends Component {
                     name="weight"
                     id="weight"
                     value={this.state.weight}
-                    placeholder="weight"
+                    placeholder="Enter weight"
                     onChange={this.changeValueHandler}
                   />
                 </Form.Group>
@@ -222,7 +202,7 @@ class Profile extends Component {
               </Form>
             </div>
           </Col>
-        </Container> 
+        </Container>
       </>
     );
   }
@@ -240,5 +220,3 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { loginUser })(Profile);
-
-// export default Profile;
