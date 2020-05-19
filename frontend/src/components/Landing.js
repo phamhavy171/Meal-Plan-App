@@ -15,7 +15,7 @@ export default function Landing() {
     <Router>
       <div>
         <Navbar bg="light" variant="light" expand="lg">
-          <Navbar.Brand to="./home">Meal Plan</Navbar.Brand>
+          <Navbar.Brand href="/home">Meal Plan</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">

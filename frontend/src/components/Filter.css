@@ -8,8 +8,10 @@
   border-radius: 5px;
   box-shadow: none;
 }
-
-.calo,
+.search-form {
+  margin: 0 auto;
+  padding: 20px;
+}
 .search-button {
   background-color: green;
   color: white;
