@@ -21,22 +21,22 @@ class MainNav extends Component {
     const authLinks = (
       <Nav>
         <LinkContainer to="/profile">
-          <NavItem className="mr-5">Profile</NavItem>
+          <NavItem className="mr-5 link">Profile</NavItem>
         </LinkContainer>
         <LinkContainer to="/" onClick={this.onLogout.bind(this)}>
-          <NavItem className="mr-5">
+          <NavItem className="mr-5 link">
             {/* <Button variant="light"> */}
-              <img
-                src={user.avatar}
-                alt="avatar"
-                title={user.name}
-                style={{
-                  width: '25px',
-                  marginRight: '5px',
-                  borderRadius: '50%',
-                }}
-              />
-              Logout
+            <img
+              src={user.avatar}
+              alt="avatar"
+              title={user.name}
+              style={{
+                width: '25px',
+                marginRight: '5px',
+                borderRadius: '50%',
+              }}
+            />
+            Logout
             {/* </Button> */}
           </NavItem>
         </LinkContainer>
@@ -46,39 +46,39 @@ class MainNav extends Component {
     const guestLinks = (
       <Nav>
         <LinkContainer to="/signup">
-          <NavItem className="mr-5">Sign Up</NavItem>
+          <NavItem className="mr-5 link">Sign Up</NavItem>
         </LinkContainer>
         <LinkContainer to="/login">
-          <NavItem className="mr-5">Sign In</NavItem>
+          <NavItem className="mr-5 link">Sign In</NavItem>
         </LinkContainer>
       </Nav>
     );
 
     return (
-      <Navbar bg="light" variant="light" expand="md">
+      <Navbar bg="light" variant="light" expand="md" className="px-3">
         <LinkContainer to="/#">
           <Navbar.Brand>Meal Prep App</Navbar.Brand>
         </LinkContainer>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse
-          id="basic-navbar-nav"
-          className="justify-content-end"
-        />
-        <Nav>
-          <LinkContainer to="/">
-            <NavItem className="mr-5">Home</NavItem>
-          </LinkContainer>
-          <LinkContainer to="/about">
-            <NavItem className="mr-5">About</NavItem>
-          </LinkContainer>
-          <LinkContainer to="/filter">
-            <NavItem className="mr-5">Filter</NavItem>
-          </LinkContainer>
-          <LinkContainer to="/form">
-            <NavItem className="mr-5">Contact</NavItem>
-          </LinkContainer>
-          <div>{isAuthenticated ? authLinks : guestLinks}</div>
-        </Nav>
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav>
+            <LinkContainer to="/">
+              <NavItem className="mr-5 link">Home</NavItem>
+            </LinkContainer>
+            <LinkContainer to="/about">
+              <NavItem className="mr-5 link">About</NavItem>
+            </LinkContainer>
+            <LinkContainer to="/filter">
+              <NavItem className="mr-5 link">Filter</NavItem>
+            </LinkContainer>
+            <LinkContainer to="/form">
+              <NavItem className="mr-5">
+                Contact
+              </NavItem>
+            </LinkContainer>
+            <div>{isAuthenticated ? authLinks : guestLinks}</div>
+          </Nav>
+        </Navbar.Collapse>
       </Navbar>
     );
   }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import View from './ProfileView';
 // import Edit from './EditView';
 import axios from 'axios';
 import { loginUser } from '../actions/authentication';
@@ -12,22 +11,6 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
 
-// const EditNow = () => {
-//   const onClick = () => {
-//     this.setState({
-//       edit: true,
-//     });
-//     return (
-//       <div>
-//         <input type="submit" value="Edit" onClick={onClick} />
-//         {Edit ? <EditPage /> : null}
-//       </div>
-//     )
-//   };
-// };
-
-// const EditPage = () => <Edit />
-
 class Profile extends Component {
   constructor() {
     super();
@@ -36,23 +19,46 @@ class Profile extends Component {
       name: '',
       age: '',
       weight: '',
-      // edit: false,
     };
-
-    this.changeValueHandler = this.changeValueHandler.bind(this);
+    // this.state = {
+    //   isHidden: true,
+    // };
 
     this.updateProfileHandler = this.updateProfileHandler.bind(this);
+    this.onNameChange = this.onNameChange.bind(this);
+    this.onEmailChange = this.onEmailChange.bind(this);
+    this.onAgeChange = this.onAgeChange.bind(this);
+    this.onWeightChange = this.onWeightChange.bind(this);
   }
 
-  changeValueHandler(e) {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
+  // toggleHidden() {
+  //   this.setState({
+  //     isHidden: !this.state.isHidden,
+  //   });
+  // }
+
+  onNameChange(event) {
+    this.setState({ name: event.target.value });
+  }
+
+  onEmailChange(event) {
+    this.setState({ email: event.target.value });
+  }
+
+  onAgeChange(event) {
+    this.setState({ age: event.target.value });
+  }
+
+  onWeightChange(event) {
+    this.setState({ weight: event.target.value });
+  }
+
+  resetForm() {
+    this.setState({ name: '', email: '', age: '', weight: '' });
   }
 
   updateProfileHandler(e) {
     e.preventDefault();
-    // console.log(this.state);
 
     axios({
       method: 'patch',
@@ -73,6 +79,7 @@ class Profile extends Component {
       .catch(function (error) {
         console.log('The error is ', error);
       });
+    this.resetForm();
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
@@ -120,9 +127,6 @@ class Profile extends Component {
   render() {
     return (
       <>
-        {/* <input type="submit" value="edit" onClick={this.onClick} />
-        <View />
-        <EditNow /> */}
         <Container>
           <Col md={{ span: 8, offset: 2 }}>
             <div>
@@ -135,24 +139,25 @@ class Profile extends Component {
                   }}
                 >
                   <Image
-                    width={150}
-                    height={150}
+                    width={175}
+                    height={175}
                     src={'../blank-profile-picture-973460_640.png'}
                     style={{ padding: '20px', borderRadius: '25px' }}
                     // Image by <a href="https://pixabay.com/users/WandererCreative-855399/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=973460">Stephanie Edwards</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=973460">Pixabay</a>
                   />
                 </div>
+                {/* <button onClick={this.toggleHidden.bind(this)}>Edit</button>
+                {!this.state.isHidden && <Edit email={this.state.email} name={this.state.name} age={this.state.age} weight={this.state.weight}/>} */}
 
                 <Form.Group>
                   <Form.Label>Email</Form.Label> <span>{this.state.email}</span>
-                  {/* <Button>Edit</Button> */}
                   <Form.Control
                     type="text"
                     name="email"
                     id="email"
                     value={this.state.email}
                     placeholder="Enter email"
-                    onChange={this.changeValueHandler}
+                    onChange={this.onEmailChange}
                     required
                   />
                 </Form.Group>
@@ -165,7 +170,7 @@ class Profile extends Component {
                     id="name"
                     value={this.state.name}
                     placeholder="Enter name"
-                    onChange={this.changeValueHandler}
+                    onChange={this.onNameChange}
                     required
                   />
                 </Form.Group>
@@ -178,8 +183,7 @@ class Profile extends Component {
                     id="age"
                     value={this.state.age}
                     placeholder="Enter age"
-                    onChange={this.changeValueHandler}
-                    required
+                    onChange={this.onAgeChange}
                   />
                 </Form.Group>
 
@@ -192,7 +196,7 @@ class Profile extends Component {
                     id="weight"
                     value={this.state.weight}
                     placeholder="Enter weight"
-                    onChange={this.changeValueHandler}
+                    onChange={this.onWeightChange}
                   />
                 </Form.Group>
 

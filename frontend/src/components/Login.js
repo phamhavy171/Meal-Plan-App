@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loginUser } from '../actions/authentication';
@@ -112,11 +113,14 @@ class Login extends Component {
               </div>
             </div>
 
-            <Button variant="info" type="submit" block>
+            <Button variant="success" type="submit" block>
               Sign In
             </Button>
-            <p className="forgot-password text-right">
+            {/* <p className="forgot-password text-right">
               Forgot <a href="#">password?</a>
+            </p> */}
+            <p className="text-right">
+              Not registered <Link to="/signup">sign up?</Link>
             </p>
           </form>
         </Col>
