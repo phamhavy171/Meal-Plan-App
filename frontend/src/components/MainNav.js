@@ -25,7 +25,6 @@ class MainNav extends Component {
         </LinkContainer>
         <LinkContainer to="/" onClick={this.onLogout.bind(this)}>
           <NavItem className="mr-5 link">
-            {/* <Button variant="light"> */}
             <img
               src={user.avatar}
               alt="avatar"
@@ -37,7 +36,6 @@ class MainNav extends Component {
               }}
             />
             Logout
-            {/* </Button> */}
           </NavItem>
         </LinkContainer>
       </Nav>

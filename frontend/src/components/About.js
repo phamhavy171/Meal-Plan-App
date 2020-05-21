@@ -83,7 +83,7 @@ const About = () => {
       </Container>
       <Container className="aboutContainer" id="aboutUsContainer">
         <h2>About Us</h2>
-        <p>About Us text coming here ...</p>
+        <p>We are a team of five students from Helsinki Business College. We made this application with knowledge that we have learned for past five months. By this project, we hope that its functionalities can help you being more mindful in choosing what to eat everyday.</p>
       </Container>
     </Container>
   );

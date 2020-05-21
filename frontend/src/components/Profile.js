@@ -4,12 +4,15 @@ import axios from 'axios';
 import { loginUser } from '../actions/authentication';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import RecipeHistory from './RecipeHistory';
 
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
+
+import * as constants from './constants/constants';
 
 class Profile extends Component {
   constructor() {
@@ -62,7 +65,7 @@ class Profile extends Component {
 
     axios({
       method: 'patch',
-      url: 'http://localhost:3000/api/users/5ec2e045b381d610c7c802a1',
+      url: constants.BACKEND + '/5ec2e045b381d610c7c802a1',
       data: {
         email: this.state.email,
         name: this.state.name,
@@ -109,7 +112,7 @@ class Profile extends Component {
     let self = this;
 
     await axios
-      .get('http://localhost:3000/api/users/findUser', {
+      .get(constants.BACKEND + '/findUser', {
         headers: { Authorization: `JWT ${accessString}` },
       })
       .then(response => {
@@ -205,6 +208,8 @@ class Profile extends Component {
                 </Button>
               </Form>
             </div>
+
+            <RecipeHistory />
           </Col>
         </Container>
       </>

@@ -6,6 +6,8 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 
+import * as constants from './constants/constants';
+
 class ContactForm extends React.Component {
   constructor(props) {
     super(props);
@@ -19,7 +21,7 @@ class ContactForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     //console.log(this.state);
-    fetch('http://localhost:3000/send', {
+    fetch(constants.BACKENDSEND, {
       method: 'POST',
       body: JSON.stringify(this.state),
       headers: {
