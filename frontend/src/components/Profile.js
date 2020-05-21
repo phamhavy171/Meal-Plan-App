@@ -12,7 +12,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
 
-import * as constants from './constants/constants';
+import * as constants from '../constants/constants';
 
 class Profile extends Component {
   constructor() {

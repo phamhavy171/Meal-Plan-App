@@ -2,7 +2,7 @@ import React from 'react';
 import Recipe from './Recipe';
 import './Filter.css';
 
-import * as constants from './constants/constants';
+import * as constants from '../constants/constants';
 
 class Filter extends React.Component {
   constructor(props) {
