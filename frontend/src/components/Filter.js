@@ -2,8 +2,7 @@ import React from "react";
 import Recipe from "./Recipe";
 import "./Filter.css";
 
-const APP_ID = "c2e839f8";
-const APP_KEY = "296e9f8d43e419f596b74385a4d1940e";
+import * as constants from "../constants/constants";
 
 class Filter extends React.Component {
   constructor(props) {
@@ -26,18 +25,30 @@ class Filter extends React.Component {
   getUrl() {
     const caloRange = this.state.name;
     if (this.state.diet === "" && this.state.health === "") {
-      return `https://api.edamam.com/search?q=${this.state.query}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=8&calories=${caloRange}`;
+      return (
+        constants.API +
+        `/search?q=${this.state.query}&app_id=${constants.APP_ID}&app_key=${constants.APP_KEY}&from=0&to=8&calories=${caloRange}`
+      );
     }
 
     if (this.state.diet === "") {
-      return `https://api.edamam.com/search?q=${this.state.query}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=8&calories=${caloRange}&health=${this.state.health}`;
+      return (
+        constants.API +
+        `/search?q=${this.state.query}&app_id=${constants.APP_ID}&app_key=${constants.APP_KEY}&from=0&to=8&calories=${caloRange}&health=${this.state.health}`
+      );
     }
 
     if (this.state.health === "") {
-      return `https://api.edamam.com/search?q=${this.state.query}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=8&calories=${caloRange}&diet=${this.state.diet}`;
+      return (
+        constants.API +
+        `/search?q=${this.state.query}&app_id=${constants.APP_ID}&app_key=${constants.APP_KEY}&from=0&to=8&calories=${caloRange}&diet=${this.state.diet}`
+      );
     }
 
-    return `https://api.edamam.com/search?q=${this.state.query}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=8&calories=${caloRange}&health=${this.state.health}&diet=${this.state.diet}`;
+    return (
+      constants.API +
+      `/search?q=${this.state.query}&app_id=${constants.APP_ID}&app_key=${constants.APP_KEY}&from=0&to=8&calories=${caloRange}&health=${this.state.health}&diet=${this.state.diet}`
+    );
   }
 
   getRecipes(e) {
@@ -97,7 +108,7 @@ class Filter extends React.Component {
                 type="text"
                 value={this.state.query}
                 onChange={this.getQuery}
-                placeholder="Search for something"
+                placeholder="Enter an ingredient"
                 required
               />
             </label>

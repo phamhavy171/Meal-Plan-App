@@ -2,6 +2,7 @@ import React from "react";
 import "./HomePage.css";
 import Carousel from "react-bootstrap/Carousel";
 import { Link } from "react-router-dom";
+
 const HomePage = () => {
   return (
     <div className="home">
@@ -9,7 +10,7 @@ const HomePage = () => {
         <Carousel>
           <Carousel.Item>
             <img
-              className="d-block mw-100 mx-auto "
+              className="d-block mw-100 mx-auto"
               src="https://source.unsplash.com/pN-o2rIv8qI"
               alt="First slide"
             />
