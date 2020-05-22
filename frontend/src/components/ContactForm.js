@@ -1,20 +1,20 @@
-import React from 'react';
+import React from "react";
 
 //React bootstrap components
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
 
-import * as constants from './constants/constants';
+import * as constants from "../constants/constants";
 
 class ContactForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      email: '',
-      message: '',
+      name: "",
+      email: "",
+      message: "",
     };
   }
 
@@ -22,33 +22,33 @@ class ContactForm extends React.Component {
     e.preventDefault();
     //console.log(this.state);
     fetch(constants.BACKENDSEND, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify(this.state),
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
     })
-      .then(response => response.json())
-      .then(response => {
-        if (response.status === 'success') {
-          alert('Message Sent.');
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.status === "success") {
+          alert("Message Sent.");
           this.resetForm();
-        } else if (response.status === 'fail') {
-          alert('Message failed to send.');
+        } else if (response.status === "fail") {
+          alert("Message failed to send.");
         }
       });
   }
 
   resetForm() {
-    this.setState({ name: '', email: '', message: '' });
+    this.setState({ name: "", email: "", message: "" });
   }
 
   render() {
     return (
       <Container>
         <Col md={{ span: 8, offset: 2 }}>
-          <h2 style={{ textAlign: 'center', padding: '20px', color: 'green' }}>
+          <h2 style={{ textAlign: "center", padding: "20px", color: "green" }}>
             Send us a message
           </h2>
           <Form onSubmit={this.handleSubmit.bind(this)} method="POST">

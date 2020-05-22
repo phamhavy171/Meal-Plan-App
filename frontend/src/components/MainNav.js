@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { logoutUser } from '../actions/authentication';
-import { withRouter } from 'react-router-dom';
-import { LinkContainer } from 'react-router-bootstrap';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../actions/authentication";
+import { withRouter } from "react-router-dom";
+import { LinkContainer } from "react-router-bootstrap";
 
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import NavItem from 'react-bootstrap/NavItem';
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import NavItem from "react-bootstrap/NavItem";
 
 class MainNav extends Component {
   onLogout(e) {
@@ -30,9 +30,9 @@ class MainNav extends Component {
               alt="avatar"
               title={user.name}
               style={{
-                width: '25px',
-                marginRight: '5px',
-                borderRadius: '50%',
+                width: "25px",
+                marginRight: "5px",
+                borderRadius: "50%",
               }}
             />
             Logout
@@ -70,9 +70,7 @@ class MainNav extends Component {
               <NavItem className="mr-5 link">Filter</NavItem>
             </LinkContainer>
             <LinkContainer to="/form">
-              <NavItem className="mr-5">
-                Contact
-              </NavItem>
+              <NavItem className="mr-5">Contact</NavItem>
             </LinkContainer>
             <div>{isAuthenticated ? authLinks : guestLinks}</div>
           </Nav>
@@ -87,7 +85,7 @@ Navbar.propTypes = {
   auth: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
